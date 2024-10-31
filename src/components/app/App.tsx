@@ -1,8 +1,12 @@
+import CoinTable from '../coinTable/CoinTable.tsx';
+
 function App() {
 
-  return (
-    <></>
-  )
+	return (
+		<>
+			<CoinTable></CoinTable>
+		</>
+	);
 }
 
-export default App
+export default App;
