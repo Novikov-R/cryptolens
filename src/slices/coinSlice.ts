@@ -1,19 +1,30 @@
-import { createSlice, createEntityAdapter, EntityState, SerializedError, Update } from '@reduxjs/toolkit';
+import {
+	createSlice,
+	createEntityAdapter,
+	EntityState,
+	Update,
+	PayloadAction,
+} from '@reduxjs/toolkit';
 import { Asset } from '../types/asset';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { ActiveFilter, Filter, SearchValue } from '../types/filter';
 
 const coinsAdapter = createEntityAdapter<Asset>();
 
 type State = EntityState<Asset, string> & {
-	activeFilter: 'rank' | 'marketCapUsd' | 'priceUsd' | 'changePercent24Hr',
+	activeFilter: ActiveFilter,
 	loading: boolean,
-	error: FetchBaseQueryError | SerializedError | null
+	searchValue: SearchValue,
+	error: boolean
 };
 
 const initialState: State = coinsAdapter.getInitialState({
 	loading: false,
-	error: null,
-	activeFilter: 'rank',
+	activeFilter: {
+		filter: 'rank',
+		reverse: false,
+	},
+	searchValue: null,
+	error: false,
 });
 
 const coinsSlice = createSlice({
@@ -21,17 +32,26 @@ const coinsSlice = createSlice({
 	initialState,
 	reducers: {
 		setCoins: coinsAdapter.setAll,
-		setActiveFilter: (state, action) => {
-			state.activeFilter = action.payload;
+		setActiveFilter: (state, action: PayloadAction<Filter>) => {
+			if (state.activeFilter.filter === action.payload) {
+				state.activeFilter.reverse = !state.activeFilter.reverse;
+			} else {
+				state.activeFilter.reverse = false;
+				state.activeFilter.filter = action.payload;
+			}
+
 		},
-		setLoading: (state, action) => {
+		setSearchValue: (state, action: PayloadAction<SearchValue>) => {
+			state.searchValue = action.payload;
+		},
+		setLoading: (state, action: PayloadAction<boolean>) => {
 			state.loading = action.payload;
 		},
-		setError: (state, action) => {
+		setError: (state, action: PayloadAction<boolean>) => {
 			state.error = action.payload;
 		},
-		setCoinUpdates: (state, action) => {
-			const updates: Update<Asset, string>[] = action.payload.map(({ id, priceUsd }: { id: string, priceUsd: number }) => ({
+		setCoinUpdates: (state, action: PayloadAction<{ id: string, priceUsd: number }[]>) => {
+			const updates: Update<Asset, string>[] = action.payload.map(({ id, priceUsd }) => ({
 				id,
 				changes: { priceUsd },
 			}));
@@ -40,7 +60,7 @@ const coinsSlice = createSlice({
 	},
 });
 
-export const { setCoins, setActiveFilter, setLoading, setError, setCoinUpdates } = coinsSlice.actions;
+export const { setCoins, setActiveFilter, setLoading, setError, setCoinUpdates, setSearchValue } = coinsSlice.actions;
 
 export const {
 	selectAll: selectAllCoins,

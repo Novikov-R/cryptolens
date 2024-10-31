@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { setCoinUpdates } from '../slices/coinSlice';
+import { useAppDispatch } from './hooks.ts';
 
 interface PriceUpdate {
 	[id: string]: number;
 }
 
 const useCoinWebSocket = ({ assetIds }: { assetIds: string[] }) => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		if (assetIds.length === 0) {

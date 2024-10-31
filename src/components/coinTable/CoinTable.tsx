@@ -1,90 +1,86 @@
 import { useGetCoinsQuery } from '../../api/apiSlice.ts';
-import { useSelector } from 'react-redux';
-import { useSearchParams } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useAppSelector } from '../../hooks/hooks.ts';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useDeferredValue, useMemo } from 'react';
 
 import Spinner from '../spiner/Spinner.tsx';
 import CoinTableItem from '../coinTableItem/CoinTableItem.tsx';
-import { RootState } from '../../store';
 import { selectAllCoins, setError } from '../../slices/coinSlice.ts';
 import useCoinWebSocket from '../../hooks/useCoinWebSocket.ts';
+import FilterList from '../filterList/FilterList.tsx';
+import SearchPanel from '../searchPanel/SearchPanel.tsx';
+import Pagination from '../pagination/Pagination.tsx';
 
 const CoinTable = () => {
+	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
-	const page = searchParams.get('page');
+	const pageParam = searchParams.get('page');
+	const page = pageParam ? Number(pageParam) : 1;
+	const offset = (page - 1) * 100;
+	const totalPages = 23;
 
-	const offset = page ? (Number(page) - 1) * 100 : 0;
+	const handlePageChange = (page: number) => {
+		navigate(`/?page=${page}`);
+	};
+
+
 	//count of coins is 2201
-	const { isLoading, isError, error } = useGetCoinsQuery({ offset });
+	const { isLoading, isFetching, isError } = useGetCoinsQuery({ offset });
+	const activeCoins = useAppSelector(state => selectAllCoins(state));
 
-	const activeCoins = useSelector((state: RootState) => selectAllCoins(state));
+	const searchValue = useAppSelector(state => state.coins.searchValue);
+	const deferredSearchValue = useDeferredValue(searchValue);
 
-	const activeFilter = useSelector((state: RootState) => state.coins.activeFilter);
+	const {
+		filter: activeFilter,
+		reverse: filterReveres,
+	} = useAppSelector(state => state.coins.activeFilter);
 
-	const assetIds = activeCoins.map(coin => coin.id);
 
+	const assetIds = useMemo(() => activeCoins.map(coin => coin.id), [activeCoins]);
 	useCoinWebSocket({ assetIds });
 
+
 	const filteredCoins = useMemo(() => {
-		const filteredCoins = activeCoins.slice();
-
-		if (activeFilter === 'rank') {
-			return filteredCoins;
-		} else {
-			return filteredCoins.sort((a, b) => b[activeFilter] - a[activeFilter]);
-		}
-	}, [activeCoins, activeFilter]);
-
-
-	const thClass = 'p-3 relative after:content-[\'\'] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-gray-100';
+		const filteredCoins = activeCoins.filter((coin) => {
+				const normalizedSearchValue = deferredSearchValue?.toLowerCase() || '';
+				return coin.name.toLowerCase().includes(normalizedSearchValue) || coin.symbol.toLowerCase().includes(normalizedSearchValue);
+			},
+		);
+		return filteredCoins.sort((a, b) =>
+			filterReveres ? b[activeFilter] - a[activeFilter] : a[activeFilter] - b[activeFilter],
+		);
+	}, [activeCoins, deferredSearchValue, activeFilter, filterReveres]);
 
 	const renderTable = () => {
-		if (isLoading) {
-			return <Spinner></Spinner>;
+		if (isLoading || isFetching) {
+			return <Spinner className="mx-auto"></Spinner>;
 		}
 		if (isError) {
-			setError(error);
+			setError(true);
 			return <div>error</div>;
 		}
-		return (
-			<table className="w-full border-collapse">
-				<thead className="sticky top-0 z-10 bg-white">
-				<tr>
-					<th className={thClass}></th>
-					<th className={thClass}>
-						<div>#</div>
-					</th>
-					<th className={thClass}>
-						<div>Название</div>
-					</th>
-					<th className={thClass}>
-						<div>Логотип</div>
-					</th>
-					<th className={thClass}>
-						<div>Цена</div>
-					</th>
-					<th className={thClass}>
-						<div>Рыночная капитализация</div>
-					</th>
-					<th className={thClass}>
-						<div>24ч %</div>
-					</th>
-				</tr>
-				</thead>
 
-				<tbody>
-				{filteredCoins.map((coin) => (
-					<CoinTableItem
-						key={coin.id}
-						symbol={coin.symbol}
-						marketCapUsd={coin.marketCapUsd}
-						changePercent24Hr={coin.changePercent24Hr}
-						rank={coin.rank}
-						priceUsd={coin.priceUsd}
-						id={coin.id} />
-				))}
-				</tbody>
-			</table>
+		return (
+			<>
+				<SearchPanel />
+				<table className="w-full border-collapse border-t-[1px] border-gray-100">
+					<FilterList />
+					<tbody>
+					{filteredCoins.map((coin) => (
+						<CoinTableItem
+							key={coin.id}
+							symbol={coin.symbol}
+							marketCapUsd={coin.marketCapUsd}
+							changePercent24Hr={coin.changePercent24Hr}
+							rank={coin.rank}
+							priceUsd={coin.priceUsd}
+							id={coin.id} />
+					))}
+					</tbody>
+				</table>
+				<Pagination totalPages={totalPages} currentPage={page} onPageChange={handlePageChange} />
+			</>
 		);
 	};
 

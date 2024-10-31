@@ -1,5 +1,7 @@
 import type { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import clsx from 'clsx';
+import Triangle from '../triangle/Triangle.tsx';
 
 type CoinTableItemProps = {
 	id: string;
@@ -14,46 +16,36 @@ const CoinTableItem: FC<CoinTableItemProps> = ({ id, symbol, priceUsd, changePer
 	const navigate = useNavigate();
 
 	const formatNumber = (value: number) => {
-		return value < 0.01 ? '$' + 0.01 : '$' + new Intl.NumberFormat('en', {
-			notation: 'compact',
-			maximumFractionDigits: 2,
-		}).format(value);
+		return value < 0.01
+			? '$0.01'
+			: '$' +
+			new Intl.NumberFormat('en', {
+				notation: 'compact',
+				maximumFractionDigits: 2,
+			}).format(value);
 	};
 
 	const renderDif = (value: string) => {
-		let color: string;
-		let num: number;
-		let triangle;
-
-		if (value[0] === '-') {
-			color = 'red-600';
-			triangle = (
-				<div
-					className="w-0 h-0 border-l-[4px] border-r-[4px] border-l-transparent border-r-transparent border-t-[8px] border-t-red-600 mr-1 mt-0.5"></div>
-			);
-			num = Number(value.slice(1));
-		} else {
-			color = 'green-600';
-			triangle = (
-				<div
-					className="w-0 h-0 border-l-[4px] border-r-[4px] border-l-transparent border-r-transparent border-b-[8px] border-b-green-600 mr-1 mt-0.5" />
-			);
-			num = Number(value);
-		}
-
+		const isNegative = value[0] === '-';
+		const color = isNegative ? 'text-red-600' : 'text-green-600';
+		const triangleDirection = isNegative ? 'down' : 'up';
+		const num = isNegative ? Number(value.slice(1)) : Number(value);
 		const stringNum = num < 0.01 ? '0.01' : num.toFixed(2);
 
 		return (
-			<div className={`text-${color} flex justify-center items-center`}>
-				{triangle}
+			<div className={clsx(color, 'flex justify-center items-center')}>
+				<Triangle size={8} color={isNegative ? '#dc2626' : '#16a34a'} direction={triangleDirection}
+						  className="mx-1" />
 				{stringNum}%
 			</div>
 		);
 	};
 
 	return (
-		<tr className="hover:bg-gray-100 cursor-pointer border-y border-gray-100 text-center font-medium text-lg"
-			onClick={() => navigate(`/coin/${id}`)}>
+		<tr
+			className="hover:bg-gray-100 cursor-pointer border-y border-gray-100 text-center font-medium text-lg"
+			onClick={() => navigate(`/coin/${id}`)}
+		>
 			<td className="p-3"></td>
 			<td className="p-3">
 				<div>{rank}</div>
@@ -76,9 +68,7 @@ const CoinTableItem: FC<CoinTableItemProps> = ({ id, symbol, priceUsd, changePer
 			<td className="p-3">
 				<div>{formatNumber(marketCapUsd)}</div>
 			</td>
-			<td className="p-3">
-				{renderDif(changePercent24Hr.toString())}
-			</td>
+			<td className="p-3">{renderDif(changePercent24Hr.toString())}</td>
 		</tr>
 	);
 };

@@ -1,6 +1,4 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { SerializedError } from '@reduxjs/toolkit';
 import type { AssetsResponse, AssetResponse, AssetHistoryResponse, Interval } from '../types/api';
 import { Asset } from '../types/asset';
 import { setCoins, setError, setLoading } from '../slices/coinSlice.ts';
@@ -19,33 +17,25 @@ const transformAssetData = (data: Asset): Asset => {
 	};
 };
 
-function isFetchBaseQueryError(error: unknown): error is FetchBaseQueryError {
-	return typeof error === 'object' && error != null && 'status' in error;
-}
-
-function isSerializedError(error: unknown): error is SerializedError {
-	return typeof error === 'object' && error != null && 'message' in error;
-}
-
 
 export const apiSlice = createApi({
 	reducerPath: 'api',
 	baseQuery: fetchBaseQuery({ baseUrl: 'https://api.coincap.io/v2/' }),
 	endpoints: builder => ({
-		getCoins: builder.query<AssetsResponse, { limit?: number; offset?: number }>({
-			query: ({ limit = 100, offset = 0 }) => `/assets?offset=${offset}&limit=${limit}`,
+		getCoins: builder.query<AssetsResponse, { limit?: number; offset?: number, search?: string | null }>({
+			query: ({ limit = 100, offset = 0, search }) => {
+				const searchString = search ? `&search=${search}` : '';
+				return `/assets?offset=${offset}&limit=${limit}${searchString}`;
+			},
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				dispatch(setLoading(true));
 				try {
 					const { data } = await queryFulfilled;
 					dispatch(setCoins(data.data));
-					dispatch(setError(null));
-				} catch (error: unknown) {
-					if (isFetchBaseQueryError(error) || isSerializedError(error)) {
-						dispatch(setError(error));
-					} else {
-						dispatch(setError({ message: 'Неизвестная ошибка' } as SerializedError));
-					}
+					dispatch(setError(false));
+				} catch (e) {
+					console.error(e);
+					dispatch(setError(true));
 				} finally {
 					dispatch(setLoading(false));
 				}
