@@ -27,6 +27,7 @@ export const apiSlice = createApi({
 				const searchString = search ? `&search=${search}` : '';
 				return `/assets?offset=${offset}&limit=${limit}${searchString}`;
 			},
+			keepUnusedDataFor: 0,
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				dispatch(setLoading(true));
 				try {

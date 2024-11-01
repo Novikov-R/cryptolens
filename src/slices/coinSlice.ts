@@ -13,6 +13,7 @@ const coinsAdapter = createEntityAdapter<Asset>();
 type State = EntityState<Asset, string> & {
 	activeFilter: ActiveFilter,
 	loading: boolean,
+	selectedCoin: string | null,
 	searchValue: SearchValue,
 	error: boolean
 };
@@ -23,6 +24,7 @@ const initialState: State = coinsAdapter.getInitialState({
 		filter: 'rank',
 		reverse: false,
 	},
+	selectedCoin: null,
 	searchValue: null,
 	error: false,
 });
@@ -40,6 +42,9 @@ const coinsSlice = createSlice({
 				state.activeFilter.filter = action.payload;
 			}
 
+		},
+		setSelectedCoin: (state, action: PayloadAction<string>) => {
+			state.selectedCoin = action.payload;
 		},
 		setSearchValue: (state, action: PayloadAction<SearchValue>) => {
 			state.searchValue = action.payload;
@@ -60,7 +65,15 @@ const coinsSlice = createSlice({
 	},
 });
 
-export const { setCoins, setActiveFilter, setLoading, setError, setCoinUpdates, setSearchValue } = coinsSlice.actions;
+export const {
+	setCoins,
+	setActiveFilter,
+	setLoading,
+	setError,
+	setCoinUpdates,
+	setSearchValue,
+	setSelectedCoin,
+} = coinsSlice.actions;
 
 export const {
 	selectAll: selectAllCoins,

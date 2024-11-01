@@ -1,93 +1,82 @@
 import { useGetCoinsQuery } from '../../api/apiSlice.ts';
 import { useAppSelector } from '../../hooks/hooks.ts';
+import { selectAllCoins } from '../../slices/coinSlice.ts';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useDeferredValue, useMemo } from 'react';
+import { useDeferredValue, useState } from 'react';
+import useCoinWebSocket from '../../hooks/useCoinWebSocket.ts';
 
 import Spinner from '../spiner/Spinner.tsx';
 import CoinTableItem from '../coinTableItem/CoinTableItem.tsx';
-import { selectAllCoins, setError } from '../../slices/coinSlice.ts';
-import useCoinWebSocket from '../../hooks/useCoinWebSocket.ts';
 import FilterList from '../filterList/FilterList.tsx';
-import SearchPanel from '../searchPanel/SearchPanel.tsx';
 import Pagination from '../pagination/Pagination.tsx';
+import useFilteredCoins from '../../hooks/useFilteredCoins.tsx';
+
+import { Asset } from '../../types/asset';
+import AddCoinModal from '../addCoinModal/AddCoinModal.tsx';
+
+const ITEMS_PER_PAGE = 100;
+const TOTAL_PAGES = 24;
 
 const CoinTable = () => {
 	const navigate = useNavigate();
 	const [searchParams] = useSearchParams();
-	const pageParam = searchParams.get('page');
-	const page = pageParam ? Number(pageParam) : 1;
-	const offset = (page - 1) * 100;
-	const totalPages = 23;
+	const page = Number(searchParams.get('page')) || 1;
+	const offset = (page - 1) * ITEMS_PER_PAGE;
 
-	const handlePageChange = (page: number) => {
-		navigate(`/?page=${page}`);
-	};
-
-
-	//count of coins is 2201
-	const { isLoading, isFetching, isError } = useGetCoinsQuery({ offset });
-	const activeCoins = useAppSelector(state => selectAllCoins(state));
-
+	const { isLoading, isError } = useGetCoinsQuery({ offset });
+	const activeCoins = useAppSelector(selectAllCoins);
 	const searchValue = useAppSelector(state => state.coins.searchValue);
 	const deferredSearchValue = useDeferredValue(searchValue);
+	const { filter: activeFilter, reverse: filterReveres } = useAppSelector(state => state.coins.activeFilter);
 
-	const {
-		filter: activeFilter,
-		reverse: filterReveres,
-	} = useAppSelector(state => state.coins.activeFilter);
+	useCoinWebSocket({ assetIds: activeCoins.map(coin => coin.id) });
 
+	const filteredCoins = useFilteredCoins({ activeCoins, activeFilter, filterReveres, deferredSearchValue });
 
-	const assetIds = useMemo(() => activeCoins.map(coin => coin.id), [activeCoins]);
-	useCoinWebSocket({ assetIds });
-
-
-	const filteredCoins = useMemo(() => {
-		const filteredCoins = activeCoins.filter((coin) => {
-				const normalizedSearchValue = deferredSearchValue?.toLowerCase() || '';
-				return coin.name.toLowerCase().includes(normalizedSearchValue) || coin.symbol.toLowerCase().includes(normalizedSearchValue);
-			},
-		);
-		return filteredCoins.sort((a, b) =>
-			filterReveres ? b[activeFilter] - a[activeFilter] : a[activeFilter] - b[activeFilter],
-		);
-	}, [activeCoins, deferredSearchValue, activeFilter, filterReveres]);
-
-	const renderTable = () => {
-		if (isLoading || isFetching) {
-			return <Spinner className="mx-auto"></Spinner>;
-		}
-		if (isError) {
-			setError(true);
-			return <div>error</div>;
-		}
-
-		return (
-			<>
-				<SearchPanel />
-				<table className="w-full border-collapse border-t-[1px] border-gray-100">
-					<FilterList />
-					<tbody>
-					{filteredCoins.map((coin) => (
-						<CoinTableItem
-							key={coin.id}
-							symbol={coin.symbol}
-							marketCapUsd={coin.marketCapUsd}
-							changePercent24Hr={coin.changePercent24Hr}
-							rank={coin.rank}
-							priceUsd={coin.priceUsd}
-							id={coin.id} />
-					))}
-					</tbody>
-				</table>
-				<Pagination totalPages={totalPages} currentPage={page} onPageChange={handlePageChange} />
-			</>
-		);
+	const handlePageChange = (newPage: number) => {
+		navigate(`/?page=${newPage}`);
 	};
+
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	return (
 		<div className="container mx-auto max-w-[1260px] max-lg:w-full">
-			{renderTable()}
+			{renderTableContent({ isError, isLoading, filteredCoins, setIsModalOpen })}
+			<Pagination
+				totalPages={TOTAL_PAGES}
+				currentPage={page}
+				onPageChange={handlePageChange}
+			/>
+			<AddCoinModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
 		</div>
+	);
+};
+
+const renderTableContent = ({ isLoading, isError, filteredCoins, setIsModalOpen }: {
+	isLoading: boolean,
+	isError: boolean,
+	filteredCoins: Asset[],
+	setIsModalOpen: (state: boolean) => void
+}) => {
+	if (isLoading) {
+		return <Spinner size={48} className="mx-auto mt-2" />;
+	}
+	if (isError) {
+		return <div>Ошибка загрузки монет</div>;
+	}
+	return (
+		<table className="w-full border-collapse border-t-[1px] border-gray-100">
+			<FilterList />
+			<tbody>
+			{filteredCoins.map(coin => (
+				<CoinTableItem
+					key={coin.id}
+					{...coin}
+					onAddCoin={setIsModalOpen}
+				/>
+			))}
+			</tbody>
+		</table>
 	);
 };
 

@@ -11,7 +11,7 @@ const FilterList = () => {
 
 	const renderSortIndicator = (currentFilter: string) => {
 		if (filter !== currentFilter) return null;
-		const direction = reverse ? 'up' : 'down';
+		const direction = reverse ? 'down' : 'up';
 		return <Triangle size={8} color={'#000'} direction={direction} className="mt-1 mx-1"></Triangle>;
 	};
 

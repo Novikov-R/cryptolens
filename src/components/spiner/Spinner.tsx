@@ -7,7 +7,7 @@ interface SpinnerProps {
 	className?: string;
 }
 
-const Spinner: FC<SpinnerProps> = ({ size = 24, color = '#334155', className = '' }) => {
+const Spinner: FC<SpinnerProps> = ({ size = 24, color = '#3b82f6', className = '' }) => {
 	const isTailwindColor = color.includes('-');
 	const colorClass = isTailwindColor ? `border-${color}` : '';
 	const styleColor = !isTailwindColor ? { borderColor: color, borderTopColor: 'transparent' } : {};

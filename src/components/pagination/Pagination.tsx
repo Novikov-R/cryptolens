@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Button } from '../button/Button.tsx';
 
 interface PaginationProps {
 	currentPage: number;
@@ -10,13 +11,15 @@ const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPageChange
 	const handlePageClick = (page: number) => page !== currentPage && onPageChange(page);
 
 	const renderPageButton = (page: number) => (
-		<button
+		<Button
 			key={page}
-			className={`px-4 py-2 mx-1 rounded ${currentPage === page ? 'bg-blue-500 text-white' : 'hover:bg-gray-200'}`}
+			size="sm"
+			variant="default"
+			className={currentPage === page ? 'bg-blue-500 text-white' : 'hover:bg-gray-200'}
 			onClick={() => handlePageClick(page)}
 		>
 			{page}
-		</button>
+		</Button>
 	);
 
 	const renderPageNumbers = () => {
@@ -26,14 +29,14 @@ const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPageChange
 		} else {
 			pages.push(renderPageButton(1));
 
-			if (currentPage > 4) pages.push(<span key="dots-left">...</span>);
+			if (currentPage > 3) pages.push(<span key="dots-left">...</span>);
 
 			const startPage = Math.max(2, currentPage - 1);
 			const endPage = Math.min(totalPages - 1, currentPage + 1);
 
 			for (let i = startPage; i <= endPage; i++) pages.push(renderPageButton(i));
 
-			if (currentPage < totalPages - 3) pages.push(<span key="dots-right">...</span>);
+			if (currentPage < totalPages - 2) pages.push(<span key="dots-right">...</span>);
 
 			pages.push(renderPageButton(totalPages));
 		}
@@ -42,21 +45,23 @@ const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPageChange
 
 	return (
 		<div className="flex justify-center mt-4">
-			<button
+			<Button
+				variant="default"
 				className={`px-4 py-2 mx-1 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'}`}
 				onClick={() => handlePageClick(currentPage - 1)}
 				disabled={currentPage === 1}
 			>
 				Назад
-			</button>
+			</Button>
 			{renderPageNumbers()}
-			<button
+			<Button
+				variant="default"
 				className={`px-4 py-2 mx-1 rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'}`}
 				onClick={() => handlePageClick(currentPage + 1)}
 				disabled={currentPage === totalPages}
 			>
 				Вперед
-			</button>
+			</Button>
 		</div>
 	);
 };

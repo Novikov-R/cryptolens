@@ -8,7 +8,8 @@ import store from './store';
 
 import './index.css';
 import Root from './routes/Root.tsx';
-import App from './components/app/App.tsx';
+import Home from './routes/Home.tsx';
+import { StrictMode } from 'react';
 
 const router = createBrowserRouter([
 	{
@@ -17,14 +18,16 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '/',
-				element: <App />,
+				element: <Home />,
 			},
 		],
 	},
 ]);
 
 createRoot(document.getElementById('root')!).render(
+	<StrictMode>
 	<Provider store={store}>
 		<RouterProvider router={router} />
 	</Provider>,
+	</StrictMode>
 );
