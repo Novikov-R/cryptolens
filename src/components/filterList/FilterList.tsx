@@ -1,6 +1,6 @@
 import { setActiveFilter } from '../../slices/coinSlice.ts';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks.ts';
-import Triangle from '../triangle/Triangle.tsx';
+import Triangle from '../ui/triangle/Triangle.tsx';
 
 const FilterList = () => {
 	const dispatch = useAppDispatch();

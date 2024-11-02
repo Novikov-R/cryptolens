@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { setSelectedCoin } from '../../slices/coinSlice.ts';
 import clsx from 'clsx';
 
-import Triangle from '../triangle/Triangle.tsx';
+import Triangle from '../ui/triangle/Triangle.tsx';
 import { useAppDispatch } from '../../hooks/hooks.ts';
 import useFormatNumber from '../../hooks/useFormatNumber.ts';
-import { Button } from '../button/Button.tsx';
+import { Button } from '../ui/button/Button.tsx';
 
 type CoinTableItemProps = {
 	id: string;

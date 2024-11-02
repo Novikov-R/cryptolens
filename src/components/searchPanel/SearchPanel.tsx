@@ -1,4 +1,4 @@
-import Input from '../input/Input.tsx';
+import Input from '../ui/input/Input.tsx';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks.ts';
 import { ChangeEvent } from 'react';
 import { setSearchValue } from '../../slices/coinSlice.ts';

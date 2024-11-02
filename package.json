@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
+    "@types/highcharts": "^7.0.0",
     "clsx": "^2.1.1",
+    "highcharts": "^11.4.8",
+    "highcharts-react-official": "^3.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",

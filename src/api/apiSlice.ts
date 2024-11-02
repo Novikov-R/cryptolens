@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { AssetsResponse, AssetResponse, AssetHistoryResponse, Interval } from '../types/api';
-import { Asset } from '../types/asset';
-import { setCoins, setError, setLoading } from '../slices/coinSlice.ts';
+import { Asset, AssetHistory } from '../types/asset';
+import { setCoin, setCoins } from '../slices/coinSlice.ts';
 
 const transformAssetData = (data: Asset): Asset => {
 	return {
@@ -17,6 +17,21 @@ const transformAssetData = (data: Asset): Asset => {
 	};
 };
 
+const transformHistoryAssetData = (data: AssetHistory[]): AssetHistory[] => {
+	return data.map((history) => {
+			let price = Number(history.priceUsd);
+			price = price % 1 === 0 ? price : Number(price.toFixed(8));
+			return {
+				...history,
+				priceUsd: price,
+				time: Number(history.time),
+				circulatingSupply: Number(history.circulatingSupply),
+			};
+		},
+	);
+
+};
+
 
 export const apiSlice = createApi({
 	reducerPath: 'api',
@@ -29,16 +44,11 @@ export const apiSlice = createApi({
 			},
 			keepUnusedDataFor: 0,
 			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				dispatch(setLoading(true));
 				try {
 					const { data } = await queryFulfilled;
 					dispatch(setCoins(data.data));
-					dispatch(setError(false));
 				} catch (e) {
 					console.error(e);
-					dispatch(setError(true));
-				} finally {
-					dispatch(setLoading(false));
 				}
 			},
 			transformResponse: (response: AssetsResponse) => ({
@@ -48,9 +58,27 @@ export const apiSlice = createApi({
 		}),
 		getCoin: builder.query<AssetResponse, string>({
 			query: (id: string) => `/assets/${id}`,
+			keepUnusedDataFor: 0,
+			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				try {
+					const { data } = await queryFulfilled;
+					dispatch(setCoin(data.data));
+				} catch (e) {
+					console.error(e);
+				}
+			},
+			transformResponse: (response: AssetResponse) => ({
+				...response,
+				data: transformAssetData(response.data),
+			}),
 		}),
 		getCoinHistory: builder.query<AssetHistoryResponse, { id: string; interval: Interval }>({
 			query: ({ id, interval }) => `/assets/${id}/history?interval=${interval}`,
+			transformResponse: (response: AssetHistoryResponse) => ({
+				...response,
+				data: transformHistoryAssetData(response.data),
+			}),
+
 		}),
 	}),
 });

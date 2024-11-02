@@ -1,7 +1,7 @@
-import Modal from '../modal/Modal.tsx';
+import Modal from '../ui/modal/Modal.tsx';
 import { Form } from 'react-router-dom';
-import Input from '../input/Input.tsx';
-import { Button } from '../button/Button.tsx';
+import Input from '../ui/input/Input.tsx';
+import { Button } from '../ui/button/Button.tsx';
 import { useAppSelector } from '../../hooks/hooks.ts';
 import { selectCoinById } from '../../slices/coinSlice.ts';
 import useFormatNumber from '../../hooks/useFormatNumber.ts';

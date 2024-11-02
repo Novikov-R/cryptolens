@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDeferredValue, useState } from 'react';
 import useCoinWebSocket from '../../hooks/useCoinWebSocket.ts';
 
-import Spinner from '../spiner/Spinner.tsx';
+import Spinner from '../ui/spiner/Spinner.tsx';
 import CoinTableItem from '../coinTableItem/CoinTableItem.tsx';
 import FilterList from '../filterList/FilterList.tsx';
 import Pagination from '../pagination/Pagination.tsx';
@@ -40,7 +40,7 @@ const CoinTable = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	return (
-		<div className="container mx-auto max-w-[1260px] max-lg:w-full">
+		<>
 			{renderTableContent({ isError, isLoading, filteredCoins, setIsModalOpen })}
 			<Pagination
 				totalPages={TOTAL_PAGES}
@@ -48,7 +48,7 @@ const CoinTable = () => {
 				onPageChange={handlePageChange}
 			/>
 			<AddCoinModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
-		</div>
+		</>
 	);
 };
 

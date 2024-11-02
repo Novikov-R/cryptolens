@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Button } from '../button/Button.tsx';
+import { Button } from '../ui/button/Button.tsx';
 
 interface PaginationProps {
 	currentPage: number;

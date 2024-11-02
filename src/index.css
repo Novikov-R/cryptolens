@@ -7,7 +7,7 @@
     font-style: normal;
     font-weight: 100 900;
     font-display: swap;
-    src: url("./assets/fonts/Iter/InterVariable.woff2") format("woff2");
+    src: url("./assets/fonts/Iter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
 }
 
 * {

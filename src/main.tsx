@@ -1,5 +1,6 @@
-import { Provider } from 'react-redux';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 import {
 	createBrowserRouter,
 	RouterProvider,
@@ -9,7 +10,7 @@ import store from './store';
 import './index.css';
 import Root from './routes/Root.tsx';
 import Home from './routes/Home.tsx';
-import { StrictMode } from 'react';
+import Coin from './routes/Coin.tsx';
 
 const router = createBrowserRouter([
 	{
@@ -20,14 +21,18 @@ const router = createBrowserRouter([
 				path: '/',
 				element: <Home />,
 			},
+			{
+				path: '/coin/:coinId',
+				element: <Coin />,
+			},
 		],
 	},
 ]);
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-	<Provider store={store}>
-		<RouterProvider router={router} />
-	</Provider>,
-	</StrictMode>
+		<Provider store={store}>
+			<RouterProvider router={router} />
+		</Provider>,
+	</StrictMode>,
 );
