@@ -7,7 +7,7 @@ import Chart from '../chart/Chart.tsx';
 import { Interval } from '../../types/api';
 
 const CoinHistoryChart = ({ coinId }: { coinId: string }) => {
-	const [interval, setIntervalValue] = useState<Interval>('d1');
+	const [interval, setIntervalValue] = useState<Interval>('m1');
 	const { isLoading, isError, data } = useGetCoinHistoryQuery({ interval, id: coinId });
 
 	const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -43,7 +43,7 @@ const CoinHistoryChart = ({ coinId }: { coinId: string }) => {
 					>
 						<option value="h1">1 час</option>
 						<option value="h12">12 часов</option>
-						<option value="d1">24 часа</option>
+						<option value="m1">24 часа</option>
 					</select>
 					<div
 						className="w-full h-full bg-gray-100 border border-gray-200 rounded-lg shadow-inner flex items-center justify-center"

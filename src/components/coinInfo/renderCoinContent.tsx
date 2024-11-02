@@ -1,4 +1,3 @@
-import { Asset } from '../../types/asset';
 import { Button } from '../ui/button/Button.tsx';
 import Skeleton from '../ui/skeleton/Skeleton.tsx';
 
@@ -10,8 +9,8 @@ const CoinInfo = ({
 						  name,
 						  symbol,
 						  formattedPriceUsd,
-						  maxSupply,
-						  supply,
+						  formattedMaxSupply,
+						  formattedSupply,
 						  rank,
 						  formattedMarketCapUsd,
 					  },
@@ -20,7 +19,12 @@ const CoinInfo = ({
 	isLoading: boolean,
 	isError: boolean,
 	handelBack: () => void,
-	coin: Asset & { formattedPriceUsd: string; formattedMarketCapUsd: string },
+	coin: {
+		formattedPriceUsd: string; formattedMarketCapUsd: string, formattedMaxSupply: string,
+		formattedSupply: string,
+		rank: number, name: string,
+		symbol: string,
+	},
 	handleModalOpen: () => void,
 }) => {
 	if (isLoading) return <LoadingState />;
@@ -46,10 +50,10 @@ const CoinInfo = ({
 			</div>
 			<div className="text-left space-y-4 rounded-lg p-4 shadow">
 				<CoinStats label="Rank" value={rank} />
-				<CoinStats label="Supply" value={supply % 1 === 0 ? supply : supply.toFixed(2)} />
+				<CoinStats label="Supply" value={formattedSupply} />
 				<CoinStats label="Price (USD)" value={formattedPriceUsd} />
 				<CoinStats label="Market Cap (USD)" value={formattedMarketCapUsd} />
-				<CoinStats label="Max Supply" value={maxSupply % 1 === 0 ? maxSupply : maxSupply.toFixed(2) ?? 'N/A'} />
+				<CoinStats label="Max Supply" value={formattedMaxSupply ?? 'N/A'} />
 			</div>
 			<Button
 				variant="default"

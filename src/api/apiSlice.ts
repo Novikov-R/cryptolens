@@ -84,5 +84,3 @@ export const apiSlice = createApi({
 });
 
 export const { useGetCoinsQuery, useGetCoinQuery, useGetCoinHistoryQuery } = apiSlice;
-
-export default apiSlice;

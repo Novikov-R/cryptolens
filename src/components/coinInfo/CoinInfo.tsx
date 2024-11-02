@@ -8,6 +8,7 @@ import { selectCoinById, setSelectedCoin } from '../../slices/coinSlice.ts';
 
 import AddCoinModal from '../addCoinModal/AddCoinModal.tsx';
 import renderCoinContent from './renderCoinContent.tsx';
+import useThousandSeparator from '../../hooks/useThousandSeparator.ts';
 
 const CoinInfo = ({ coinId }: { coinId: string }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,6 +36,8 @@ const CoinInfo = ({ coinId }: { coinId: string }) => {
 
 	useCoinWebSocket({ assetIds: [coinId] });
 
+	const formattedSupply = useThousandSeparator(coin.supply);
+	const formattedMaxSupply = useThousandSeparator(coin.maxSupply);
 	const formattedPriceUsd = useFormatNumber(coin.priceUsd);
 	const formattedMarketCapUsd = useFormatNumber(coin.marketCapUsd);
 
@@ -44,7 +47,7 @@ const CoinInfo = ({ coinId }: { coinId: string }) => {
 				isError,
 				isLoading,
 				handelBack,
-				coin: { ...coin, formattedPriceUsd, formattedMarketCapUsd },
+				coin: { ...coin, formattedPriceUsd, formattedMarketCapUsd, formattedSupply, formattedMaxSupply },
 				handleModalOpen,
 			})}
 			<AddCoinModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />

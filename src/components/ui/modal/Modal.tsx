@@ -68,7 +68,7 @@ const Modal: FC<ModalProps> = ({
 					<div className="flex flex-col justify-between items-center h-full">
 						{title && <h2 className="text-lg font-semibold">{title}</h2>}
 						{description && <p className="mt-2 text-sm text-gray-600">{description}</p>}
-						{children && <div className="mt-4">{children}</div>}
+						<div className="mt-4 overflow-auto max-h-96">{children}</div>
 						{footer && <div className="mt-4">{footer}</div>}
 					</div>
 				</div>
