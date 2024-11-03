@@ -4,7 +4,7 @@ import { AssetResponse } from '../types/api';
 import { Portfolio } from '../types/protfolio';
 import { Asset } from '../types/asset';
 
-type PortfolioCoin = Asset & {
+export type PortfolioCoin = Asset & {
 	quantity: number;
 	timestamp: number
 };

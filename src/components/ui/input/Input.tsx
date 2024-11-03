@@ -3,7 +3,7 @@ import cn from "../../../utils/cn.ts";
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement>
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
     ({className, type, ...props}, ref) => {
         return (
             <input

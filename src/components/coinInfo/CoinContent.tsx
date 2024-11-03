@@ -1,32 +1,38 @@
+import { FC } from 'react';
 import { Button } from '../ui/button/Button.tsx';
 import Skeleton from '../ui/skeleton/Skeleton.tsx';
 
-const CoinInfo = ({
-					  isLoading,
-					  isError,
-					  handelBack,
-					  coin: {
-						  name,
-						  symbol,
-						  formattedPriceUsd,
-						  formattedMaxSupply,
-						  formattedSupply,
-						  rank,
-						  formattedMarketCapUsd,
-					  },
-					  handleModalOpen,
-				  }: {
-	isLoading: boolean,
-	isError: boolean,
-	handelBack: () => void,
+export type CoinContentProps = {
+	isLoading: boolean;
+	isError: boolean;
+	handelBack: () => void;
 	coin: {
-		formattedPriceUsd: string; formattedMarketCapUsd: string, formattedMaxSupply: string,
-		formattedSupply: string,
-		rank: number, name: string,
-		symbol: string,
-	},
-	handleModalOpen: () => void,
-}) => {
+		formattedPriceUsd: string;
+		formattedMarketCapUsd: string;
+		formattedMaxSupply: string;
+		formattedSupply: string;
+		rank: number;
+		name: string;
+		symbol: string;
+	};
+	handleModalOpen: () => void;
+}
+
+const CoinContent: FC<CoinContentProps> = ({
+											   isLoading,
+											   isError,
+											   handelBack,
+											   coin: {
+												   name,
+												   symbol,
+												   formattedPriceUsd,
+												   formattedMaxSupply,
+												   formattedSupply,
+												   rank,
+												   formattedMarketCapUsd,
+											   },
+											   handleModalOpen,
+										   }) => {
 	if (isLoading) return <LoadingState />;
 	if (isError) return <ErrorState />;
 
@@ -91,4 +97,4 @@ export const LoadingState = () => (
 
 const ErrorState = () => <div className="mx-auto my-auto">Неверное id монеты</div>;
 
-export default CoinInfo;
+export default CoinContent;

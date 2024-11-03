@@ -7,18 +7,19 @@ import { useGetCoinQuery } from '../../api/apiSlice.ts';
 import { selectCoinById, setSelectedCoin } from '../../slices/coinSlice.ts';
 
 import AddCoinModal from '../addCoinModal/AddCoinModal.tsx';
-import renderCoinContent from './renderCoinContent.tsx';
+import CoinContent from './CoinContent.tsx';
 import useThousandSeparator from '../../hooks/useThousandSeparator.ts';
 
 const CoinInfo = ({ coinId }: { coinId: string }) => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
+
 	const handleModalOpen = () => {
 		setIsModalOpen(true);
 		dispatch(setSelectedCoin(coinId));
 	};
 
-	const navigate = useNavigate();
 	const handelBack = () => {
 		navigate(-1);
 	};
@@ -43,16 +44,21 @@ const CoinInfo = ({ coinId }: { coinId: string }) => {
 
 	return (
 		<>
-			{renderCoinContent({
-				isError,
-				isLoading,
-				handelBack,
-				coin: { ...coin, formattedPriceUsd, formattedMarketCapUsd, formattedSupply, formattedMaxSupply },
-				handleModalOpen,
-			})}
+			<CoinContent
+				isError={isError}
+				isLoading={isLoading}
+				handelBack={handelBack}
+				coin={{
+					...coin,
+					formattedPriceUsd,
+					formattedMarketCapUsd,
+					formattedSupply,
+					formattedMaxSupply,
+				}}
+				handleModalOpen={handleModalOpen}
+			/>
 			<AddCoinModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
 		</>
-
 	);
 };
 

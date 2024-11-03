@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { AssetsResponse, AssetResponse, AssetHistoryResponse, Interval } from '../types/api';
 import { Asset, AssetHistory } from '../types/asset';
-import { setCoin, setCoins } from '../slices/coinSlice.ts';
+import { setCoin, setCoins, setCoinUpdates } from '../slices/coinSlice.ts';
 
 const transformAssetData = (data: Asset): Asset => {
 	return {
@@ -80,7 +80,22 @@ export const apiSlice = createApi({
 			}),
 
 		}),
+		getTopCoins: builder.query<AssetsResponse, number>({
+			query: (limit) => `/assets?limit=${limit}`,
+			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+				try {
+					const { data } = await queryFulfilled;
+					dispatch(setCoinUpdates(data.data));
+				} catch (e) {
+					console.error(e);
+				}
+			},
+			transformResponse: (response: AssetsResponse) => ({
+				...response,
+				data: response.data.map(transformAssetData),
+			}),
+		}),
 	}),
 });
 
-export const { useGetCoinsQuery, useGetCoinQuery, useGetCoinHistoryQuery } = apiSlice;
+export const { useGetCoinsQuery, useGetCoinQuery, useGetCoinHistoryQuery, useGetTopCoinsQuery } = apiSlice;

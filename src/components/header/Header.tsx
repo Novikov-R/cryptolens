@@ -1,11 +1,11 @@
-import { useGetCoinsQuery } from '../../api/apiSlice.ts';
+import { useGetTopCoinsQuery } from '../../api/apiSlice.ts';
 
 import TopCoin from '../topCoin/TopCoin.tsx';
 import Portfolio from '../portfolio/Portfolio.tsx';
-import Spinner from '../ui/spiner/Spinner.tsx';
+import Spinner from '../ui/spinner/Spinner.tsx';
 
 const Header = () => {
-	const { data: topCoins = { data: [] }, isLoading } = useGetCoinsQuery({ limit: 3 });
+	const { data: topCoins = { data: [] }, isLoading } = useGetTopCoinsQuery(3);
 
 	return (
 		<div className="w-full h-[50px] bg-gray-100">

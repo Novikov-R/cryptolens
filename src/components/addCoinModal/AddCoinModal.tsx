@@ -1,5 +1,4 @@
 import Modal from '../ui/modal/Modal.tsx';
-import { Form } from 'react-router-dom';
 import Input from '../ui/input/Input.tsx';
 import { Button } from '../ui/button/Button.tsx';
 import { useAppSelector } from '../../hooks/hooks.ts';
@@ -39,7 +38,7 @@ const AddCoinModal = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (valu
 			title={`Добавить транзакцию с ${name}`}
 			description={`Цена одной монеты ${useFormatNumber(priceUsd)}`}
 		>
-			<Form className="flex flex-col items-center">
+			<form className="flex flex-col items-center">
 				<Input placeholder="0" onChange={onChangeCount} value={countOfCoins} className="max-w-xs mt-1" />
 				<div className="mt-2 text-center">Общая сумма: <span
 					className="font-bold">{useFormatNumber(priceUsd * Number(countOfCoins))}</span>
@@ -53,7 +52,7 @@ const AddCoinModal = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (valu
 						Подтвердить
 					</Button>
 				</div>
-			</Form>
+			</form>
 		</Modal>
 	);
 };

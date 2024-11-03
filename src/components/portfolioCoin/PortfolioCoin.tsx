@@ -3,7 +3,7 @@ import useFormatNumber from '../../hooks/useFormatNumber.ts';
 import { Button } from '../ui/button/Button.tsx';
 import useDeleteCoinFromStorage from '../../hooks/useDeleteCoinFromStorage.ts';
 
-type PortfolioCoinProps = {
+export type PortfolioCoinProps = {
 	timestamp: number,
 	symbol: string,
 	name: string,

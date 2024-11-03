@@ -8,7 +8,7 @@ import { useAppDispatch } from '../../hooks/hooks.ts';
 import useFormatNumber from '../../hooks/useFormatNumber.ts';
 import { Button } from '../ui/button/Button.tsx';
 
-type CoinTableItemProps = {
+export type CoinTableItemProps = {
 	id: string;
 	symbol: string;
 	priceUsd: number;

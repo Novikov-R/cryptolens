@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useGetCoinHistoryQuery } from '../../api/apiSlice.ts';
 
-import Spinner from '../ui/spiner/Spinner.tsx';
+import Spinner from '../ui/spinner/Spinner.tsx';
 import Chart from '../chart/Chart.tsx';
 
 import { Interval } from '../../types/api';

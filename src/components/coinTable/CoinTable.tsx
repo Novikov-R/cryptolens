@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useDeferredValue, useState } from 'react';
 import useCoinWebSocket from '../../hooks/useCoinWebSocket.ts';
 
-import Spinner from '../ui/spiner/Spinner.tsx';
+import Spinner from '../ui/spinner/Spinner.tsx';
 import CoinTableItem from '../coinTableItem/CoinTableItem.tsx';
 import FilterList from '../filterList/FilterList.tsx';
 import Pagination from '../pagination/Pagination.tsx';

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import cn from '../../../utils/cn.ts';
 
-type TriangleProps = {
+export type TriangleProps = {
 	size: number;
 	color: string;
 	direction: 'up' | 'down';
@@ -9,7 +9,7 @@ type TriangleProps = {
 };
 
 const Triangle: FC<TriangleProps> = ({ size, color, direction, className }) => {
-	const triangleClass = 'w-0 h-0 border-l-[${borderSize / 2}px] border-r-[${borderSize / 2}px]';
+	const triangleClass = 'w-0 h-0 border-l-[${borderSize / 2}px] border-r-[${borderSize / 2}px] border-transparent';
 
 	const borderStyle = {
 		borderLeftWidth: `${size / 2}px`,
