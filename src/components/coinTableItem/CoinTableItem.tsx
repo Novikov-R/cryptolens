@@ -72,7 +72,7 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
 				<div>{rank}</div>
 			</td>
 			<td className="p-3">
-				<div>{symbol}</div>
+				<div data-testid="symbol">{symbol}</div>
 			</td>
 			<td className="p-3">
 				<div>
@@ -86,13 +86,15 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
 			<td className={cn(
 				'p-3 transition-colors ease-in duration-500',
 				priceColor,
-			)}>
+			)}
+				data-testid="coin-price"
+			>
 				<div>{useFormatNumber(priceUsd)}</div>
 			</td>
 			<td className="p-3">
 				<div>{useFormatNumber(marketCapUsd)}</div>
 			</td>
-			<td className="p-3">{renderDif(changePercent24Hr.toString())}</td>
+			<td className="p-3" data-testid="percentage-change">{renderDif(changePercent24Hr.toString())}</td>
 		</tr>
 	);
 };
@@ -105,12 +107,13 @@ const renderDif = (value: string) => {
 	const stringNum = num < 0.01 ? '0.01' : num.toFixed(2);
 
 	return (
-		<div className={cn(color, 'flex justify-center items-center')}>
+		<div className={cn(color, 'flex justify-center items-center')} data-testid="triangle-icon">
 			<Triangle size={8} color={isNegative ? '#dc2626' : '#16a34a'} direction={triangleDirection}
 					  className="mx-1" />
 			{stringNum}%
 		</div>
 	);
 };
+
 
 export default CoinTableItem;
