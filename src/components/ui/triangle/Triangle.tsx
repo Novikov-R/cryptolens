@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import clsx from 'clsx';
+import cn from '../../../utils/cn.ts';
 
 type TriangleProps = {
 	size: number;
@@ -20,7 +20,7 @@ const Triangle: FC<TriangleProps> = ({ size, color, direction, className }) => {
 		borderTopColor: direction === 'down' ? color : 'transparent',
 	};
 
-	return <div className={clsx(triangleClass, className)} style={borderStyle} />;
+	return <div className={cn(triangleClass, className)} style={borderStyle} />;
 };
 
 export default Triangle;

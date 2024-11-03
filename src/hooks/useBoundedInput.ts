@@ -23,9 +23,14 @@ const useBoundedInput = (initialValue: number, minValue: number, maxValue: numbe
 		}
 	};
 
+	const clearValue = () => {
+		setValue('');
+	};
+
 	return {
 		value,
 		onChange,
+		clearValue,
 	};
 };
 

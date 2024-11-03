@@ -12,23 +12,34 @@ const Portfolio = () => {
 	const { cost, dif, difInPercent, portfolioCoins } = useGetPortfolio();
 
 	const formattedCost = useFormatNumber(cost);
-	const formattedDif = useThousandSeparator(dif);
+	let formattedDif = useThousandSeparator(Math.abs(dif));
+	formattedDif = dif === 0
+		? '$0'
+		: `${dif > 0 ? '+' : '-'} $${formattedDif}`;
 	const formattedDifInPercent = useThousandSeparator(difInPercent);
+
 
 	return (
 		<>
 			<Button variant={'ghost'} className="flex" onClick={() => setIsModalOpen(true)}>
 				{formattedCost}
-				{!!cost && <div className="ml-4">{formattedDif} ({formattedDifInPercent} %)</div>}
+				{!!cost && <div
+					className="ml-1">{formattedDif} ({formattedDifInPercent} %)</div>}
 			</Button>
-			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Ваш портфель монет">
-				{portfolioCoins.length ? <div className="space-y-3">
+			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Ваш портфель"
+				   description={
+					   <div>Стоимость вашего портфеля: <span className="font-bold">{formattedCost}</span></div>
+				   }
+				   footer={<Button variant="default" onClick={() => setIsModalOpen(false)}>Закрыть</Button>}
+			>
+				<div className="text-center mt-2 text-sm text-gray-600">Список транзакций</div>
+				{portfolioCoins.length ? <div className="space-y-3 mt-3 pt-3 border-t-[1px] border-gray-300">
 					{portfolioCoins.map((coin, index) => <PortfolioCoin key={index} priceUsd={coin.priceUsd}
 																		name={coin.name} quantity={coin.quantity}
 																		timestamp={coin.timestamp}
 																		symbol={coin.symbol} id={coin.id} />,
 					)}
-				</div> : 'Ваш портфель пуст'}
+				</div> : <div className="text-center mt-2 text-sm text-gray-600">Транзакции отсутствуют</div>}
 			</Modal>
 		</>
 	);

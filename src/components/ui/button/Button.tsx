@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import { ButtonHTMLAttributes, forwardRef } from 'react';
+import cn from '../../../utils/cn.ts';
 
 export interface ButtonProps
 	extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,14 +8,14 @@ export interface ButtonProps
 }
 
 const buttonVariants = {
-	base: 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+	base: 'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
 	variants: {
-		default: 'bg-primary text-primary-foreground hover:bg-primary/90',
-		destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
-		outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
-		secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-		ghost: 'hover:bg-accent hover:text-accent-foreground',
-		link: 'text-primary underline-offset-4 hover:underline',
+		default: 'bg-blue-600 text-white hover:bg-blue-500',
+		destructive: 'bg-red-600 text-white hover:bg-red-500',
+		outline: 'border border-gray-300 bg-white text-gray-800 hover:bg-gray-100',
+		secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
+		ghost: 'bg-transparent hover:bg-gray-100 text-gray-800',
+		link: 'text-blue-600 underline underline-offset-4 hover:no-underline',
 	},
 	sizes: {
 		default: 'h-10 px-4 py-2',
@@ -29,7 +29,12 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 	({ className, variant = 'default', size = 'default', children, ...props }, ref) => {
 		return (
 			<button
-				className={clsx(buttonVariants.base, buttonVariants.variants[variant], buttonVariants.sizes[size], className)}
+				className={cn(
+					buttonVariants.base,
+					buttonVariants.variants[variant],
+					buttonVariants.sizes[size],
+					className,
+				)}
 				ref={ref}
 				{...props}
 			>

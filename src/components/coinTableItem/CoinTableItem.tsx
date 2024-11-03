@@ -1,7 +1,7 @@
 import { FC, MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setSelectedCoin } from '../../slices/coinSlice.ts';
-import clsx from 'clsx';
+import cn from '../../utils/cn.ts';
 
 import Triangle from '../ui/triangle/Triangle.tsx';
 import { useAppDispatch } from '../../hooks/hooks.ts';
@@ -62,7 +62,7 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
 		>
 			<td className="p-3">
 				<Button
-					variant='outline'
+					variant="outline"
 					onClick={handelAddCoin}
 					className="w-1/2 h-1/2 group">
 					Добавить
@@ -83,7 +83,7 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
 					/>
 				</div>
 			</td>
-			<td className={clsx(
+			<td className={cn(
 				'p-3 transition-colors ease-in duration-500',
 				priceColor,
 			)}>
@@ -105,7 +105,7 @@ const renderDif = (value: string) => {
 	const stringNum = num < 0.01 ? '0.01' : num.toFixed(2);
 
 	return (
-		<div className={clsx(color, 'flex justify-center items-center')}>
+		<div className={cn(color, 'flex justify-center items-center')}>
 			<Triangle size={8} color={isNegative ? '#dc2626' : '#16a34a'} direction={triangleDirection}
 					  className="mx-1" />
 			{stringNum}%

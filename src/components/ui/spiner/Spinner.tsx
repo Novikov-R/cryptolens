@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import clsx from 'clsx';
+import cn from '../../../utils/cn.ts';
 
 interface SpinnerProps {
 	size?: number;
@@ -14,10 +14,10 @@ const Spinner: FC<SpinnerProps> = ({ size = 24, color = '#3b82f6', className = '
 
 	return (
 		<div
-			className={clsx(
+			className={cn(
 				'rounded-full border-4 border-t-transparent animate-spin',
 				colorClass,
-				className
+				className,
 			)}
 			style={{
 				width: size,

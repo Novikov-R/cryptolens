@@ -89,6 +89,6 @@ export const LoadingState = () => (
 	</div>
 );
 
-const ErrorState = () => <div className="mx-auto my-auto">Coin not found.</div>;
+const ErrorState = () => <div className="mx-auto my-auto">Неверное id монеты</div>;
 
 export default CoinInfo;

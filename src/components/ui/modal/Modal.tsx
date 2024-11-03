@@ -1,12 +1,12 @@
 import { MouseEvent, FC, ReactNode } from 'react';
 import { useEffect } from 'react';
-import clsx from 'clsx';
+import cn from '../../../utils/cn.ts';
 
 type ModalProps = {
 	isOpen: boolean;
 	onClose: () => void;
 	title?: string;
-	description?: string;
+	description?: ReactNode;
 	footer?: ReactNode;
 	children?: ReactNode;
 	className?: string;
@@ -64,11 +64,11 @@ const Modal: FC<ModalProps> = ({
 				className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70"
 				onClick={handleOverlayClick}
 			>
-				<div className={clsx('bg-white rounded-lg shadow-lg max-w-lg w-1/2 mx-auto p-6', className)}>
+				<div className={cn('bg-white rounded-lg shadow-lg max-w-md  mx-auto p-6 w-full', className)}>
 					<div className="flex flex-col justify-between items-center h-full">
 						{title && <h2 className="text-lg font-semibold">{title}</h2>}
-						{description && <p className="mt-2 text-sm text-gray-600">{description}</p>}
-						<div className="mt-4 overflow-auto max-h-96">{children}</div>
+						{description && <div className="mt-2 text-sm text-gray-600">{description}</div>}
+						<div className="mt-4 overflow-auto max-h-96 w-full max-w-sm px-2">{children}</div>
 						{footer && <div className="mt-4">{footer}</div>}
 					</div>
 				</div>

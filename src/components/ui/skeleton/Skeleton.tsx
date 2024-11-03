@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import clsx from 'clsx';
+import cn from '../../../utils/cn.ts';
 
 const Skeleton = ({
 					  className,
@@ -7,7 +7,7 @@ const Skeleton = ({
 				  }: HTMLAttributes<HTMLDivElement>) => {
 	return (
 		<div
-			className={clsx('animate-pulse bg-gray-300', className)}
+			className={cn('animate-pulse rounded-md bg-gray-300', className)}
 			{...props}
 		/>
 	);

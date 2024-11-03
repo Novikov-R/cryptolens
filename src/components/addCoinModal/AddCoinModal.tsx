@@ -7,9 +7,14 @@ import { selectCoinById } from '../../slices/coinSlice.ts';
 import useFormatNumber from '../../hooks/useFormatNumber.ts';
 import useBoundedInput from '../../hooks/useBoundedInput.ts';
 import useAddCoinToStorage from '../../hooks/useAddCoinToStorage.ts';
+import { useEffect } from 'react';
 
 const AddCoinModal = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (value: boolean) => void }) => {
-	const { onChange: onChangeCount, value: countOfCoins } = useBoundedInput(0, 0, 2000);
+	const { onChange: onChangeCount, value: countOfCoins, clearValue } = useBoundedInput(0, 0, 2000);
+
+	useEffect(() => {
+		if (!isOpen) clearValue();
+	}, [clearValue, isOpen]);
 
 	const selectedCoinId = useAppSelector(state => state.coins.selectedCoin);
 	const selectedCoin = useAppSelector(state =>
@@ -34,12 +39,12 @@ const AddCoinModal = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (valu
 			title={`Добавить транзакцию с ${name}`}
 			description={`Цена одной монеты ${useFormatNumber(priceUsd)}`}
 		>
-			<Form>
-				<Input placeholder="0" onChange={onChangeCount} value={countOfCoins} />
+			<Form className="flex flex-col items-center">
+				<Input placeholder="0" onChange={onChangeCount} value={countOfCoins} className="max-w-xs mt-1" />
 				<div className="mt-2 text-center">Общая сумма: <span
 					className="font-bold">{useFormatNumber(priceUsd * Number(countOfCoins))}</span>
 				</div>
-				<div className="flex mt-4">
+				<div className="flex mt-4 items-center justify-center">
 					<Button variant="outline" onClick={() => setIsOpen(false)}
 							className="text-gray-500 hover:text-gray-700 mr-2">
 						Отмена

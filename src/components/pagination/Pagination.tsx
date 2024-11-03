@@ -14,8 +14,8 @@ const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPageChange
 		<Button
 			key={page}
 			size="sm"
-			variant="default"
-			className={currentPage === page ? 'bg-blue-500 text-white' : 'hover:bg-gray-200'}
+			variant="ghost"
+			className={currentPage === page ? 'bg-blue-500 hover:bg-blue-500 text-white' : 'hover:bg-gray-200'}
 			onClick={() => handlePageClick(page)}
 		>
 			{page}
@@ -44,9 +44,9 @@ const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPageChange
 	};
 
 	return (
-		<div className="flex justify-center mt-4">
+		<div className="flex justify-center items-center space-x-1 mt-4">
 			<Button
-				variant="default"
+				variant="ghost"
 				className={`px-4 py-2 mx-1 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'}`}
 				onClick={() => handlePageClick(currentPage - 1)}
 				disabled={currentPage === 1}
@@ -55,7 +55,7 @@ const Pagination: FC<PaginationProps> = ({ currentPage, totalPages, onPageChange
 			</Button>
 			{renderPageNumbers()}
 			<Button
-				variant="default"
+				variant="ghost"
 				className={`px-4 py-2 mx-1 rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-200'}`}
 				onClick={() => handlePageClick(currentPage + 1)}
 				disabled={currentPage === totalPages}
