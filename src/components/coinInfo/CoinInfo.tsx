@@ -21,7 +21,7 @@ const CoinInfo = ({ coinId }: { coinId: string }) => {
 	};
 
 	const handelBack = () => {
-		navigate(-1);
+		navigate('/');
 	};
 
 	const { isLoading, isError } = useGetCoinQuery(coinId);
