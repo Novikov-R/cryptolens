@@ -16,11 +16,11 @@ const CoinHistoryChart = ({ coinId }: { coinId: string }) => {
 
 	const renderLoadingOrError = () => {
 		if (isLoading) {
-			return <Spinner />;
+			return <Spinner className="mx-auto" />;
 		}
 
 		if (isError) {
-			return <div>Ошибка</div>;
+			return <div className="mx-auto">Ошибка</div>;
 		}
 
 		return null;

@@ -37,7 +37,8 @@ const CoinContent: FC<CoinContentProps> = ({
 	if (isError) return <ErrorState />;
 
 	return (
-		<div className="flex flex-col w-full md:w-1/3 p-6 border-r border-gray-200 space-y-10 justify-center relative bg-gray-50">
+		<div
+			className="flex flex-col w-full md:w-1/3 p-6 border-r border-gray-200 space-y-10 justify-center relative bg-gray-50">
 			<Button
 				variant="ghost"
 				onClick={handelBack}
@@ -80,7 +81,8 @@ const CoinStats = ({ label, value }: { label: string, value: string | number }) 
 );
 
 export const LoadingState = () => (
-	<div className="flex flex-col w-1/3 p-6 border-r border-gray-200 space-y-7 relative bg-gray-50">
+	<div
+		className="flex flex-col w-full md:w-1/3 p-6 border-r border-gray-200 space-y-10 justify-center relative bg-gray-50">
 		<div className="text-center mb-8 space-y-2">
 			<Skeleton className="w-32 h-32 mx-auto mb-4 rounded-full" />
 			<Skeleton className="h-6 w-1/2 mx-auto" />
