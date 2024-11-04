@@ -21,10 +21,10 @@ const Portfolio = () => {
 
 	return (
 		<>
-			<Button variant={'ghost'} className="flex" onClick={() => setIsModalOpen(true)}>
+			<Button variant={'ghost'} className="flex md:flex-row flex-col" onClick={() => setIsModalOpen(true)}>
 				{formattedCost}
 				{!!cost && <div
-					className="ml-1">{formattedDif} ({formattedDifInPercent} %)</div>}
+					className="md:ml-1">{formattedDif} ({formattedDifInPercent} %)</div>}
 			</Button>
 			<Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Ваш портфель"
 				   description={

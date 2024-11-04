@@ -22,7 +22,7 @@ const PortfolioCoin: FC<PortfolioCoinProps> = ({ timestamp, symbol, name, quanti
 	const day = date.getDate();
 	return <div
 		className="flex items-center justify-between w-full border-gray-400">
-		<div className="flex items-center space-x-2">
+		<div className="flex items-center sm:space-x-2 space-x-1">
 			<div>{day}.{month}.{year}</div>
 			<img className="w-6 h-6"
 				 src={`https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`}
@@ -30,7 +30,7 @@ const PortfolioCoin: FC<PortfolioCoinProps> = ({ timestamp, symbol, name, quanti
 			<div>{name}</div>
 			<div>{useFormatNumber(priceUsd * quantity)}</div>
 		</div>
-		<Button variant="outline" onClick={deleteCoin}>Удалить</Button>
+		<Button variant="outline" onClick={deleteCoin} className="sm:px-4 px-1">Удалить</Button>
 	</div>;
 };
 

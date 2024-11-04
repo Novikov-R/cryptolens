@@ -65,18 +65,20 @@ const renderTableContent = ({ isLoading, isError, filteredCoins, setIsModalOpen 
 		return <div>Ошибка загрузки монет</div>;
 	}
 	return (
-		<table className="w-full border-collapse border-t-[1px] border-gray-100">
-			<FilterList />
-			<tbody>
-			{filteredCoins.map(coin => (
-				<CoinTableItem
-					key={coin.id}
-					{...coin}
-					onAddCoin={setIsModalOpen}
-				/>
-			))}
-			</tbody>
-		</table>
+		<div className="overflow-x-auto">
+			<table className="min-w-full border-collapse border-t-[1px] border-gray-100">
+				<FilterList />
+				<tbody>
+				{filteredCoins.map(coin => (
+					<CoinTableItem
+						key={coin.id}
+						{...coin}
+						onAddCoin={setIsModalOpen}
+					/>
+				))}
+				</tbody>
+			</table>
+		</div>
 	);
 };
 

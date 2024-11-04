@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import Spinner from '../components/ui/spinner/Spinner';
+import { ComponentProps } from 'react';
 
 const meta: Meta<typeof Spinner> = {
 	title: 'Components/Spinner',
@@ -30,7 +31,7 @@ const meta: Meta<typeof Spinner> = {
 
 export default meta;
 
-const Template: StoryFn<React.ComponentProps<typeof Spinner>> = (args) => (
+const Template: StoryFn<ComponentProps<typeof Spinner>> = (args) => (
 	<Spinner {...args} />
 );
 

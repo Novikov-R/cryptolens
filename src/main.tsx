@@ -11,11 +11,13 @@ import './index.css';
 import Root from './routes/Root.tsx';
 import Home from './routes/Home.tsx';
 import Coin from './routes/Coin.tsx';
+import ErrorPage from './routes/ErorPage.tsx';
 
 const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <Root />,
+		errorElement: <ErrorPage />,
 		children: [
 			{
 				path: '/',

@@ -14,10 +14,10 @@ const TopCoin: FC<TopCoinProps> = ({ priceUsd, rank, symbol, id }) => {
 
 	return (
 		<Link to={`/coin/${id}`}>
-			<div className="flex space-x-2 items-center">
-				<div className="font-bold mr-1">{rank}:</div>
+			<div className="flex space-x-2 md:space-x-2 items-center">
+				<div className="font-bold md:mr-1">{rank}:</div>
 				<img
-					className="w-6 h-6"
+					className="md:w-6 md:h-6 w-4 h-4"
 					src={`https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`}
 					alt={symbol}
 				/>

@@ -37,7 +37,7 @@ const CoinContent: FC<CoinContentProps> = ({
 	if (isError) return <ErrorState />;
 
 	return (
-		<div className="flex flex-col w-1/3 p-6 border-r border-gray-200 space-y-10 justify-center relative bg-gray-50">
+		<div className="flex flex-col w-full md:w-1/3 p-6 border-r border-gray-200 space-y-10 justify-center relative bg-gray-50">
 			<Button
 				variant="ghost"
 				onClick={handelBack}

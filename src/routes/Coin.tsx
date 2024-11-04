@@ -8,12 +8,13 @@ const Coin = () => {
 
 	return (
 		<div
-			className="mx-auto w-full max-w-[1440px] flex items-center justify-center p-6">
-			<div className="bg-white shadow-lg rounded-2xl w-full h-full flex border border-gray-200">
+			className="mx-auto w-full max-w-[1440px] flex items-center justify-center mt-3 sm:mt-6 md:px-6">
+			<div
+				className="bg-white shadow-lg rounded-2xl w-full h-full md:flex border border-gray-200 grid grid-rows-2 grid-cols-1">
 				{coinId && (
 					<>
 						<CoinInfo coinId={coinId} />
-						<CoinHistoryChart coinId={coinId}/>
+						<CoinHistoryChart coinId={coinId} />
 					</>
 				)}
 			</div>

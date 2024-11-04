@@ -29,7 +29,7 @@ const CoinHistoryChart = ({ coinId }: { coinId: string }) => {
 	const loadingOrError = renderLoadingOrError();
 
 	return (
-		<div className="flex flex-col w-2/3 p-6 bg-white">
+		<div className="flex flex-col w-full md:w-2/3 p-6 bg-white">
 			{loadingOrError || (
 				<>
 					<label htmlFor="timeframe" className="text-gray-500 mb-2 font-medium">

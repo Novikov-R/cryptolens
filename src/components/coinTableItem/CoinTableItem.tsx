@@ -60,21 +60,21 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
 			className="hover:bg-gray-100 cursor-pointer border-y border-gray-100 text-center font-medium text-lg"
 			onClick={() => navigate(`/coin/${id}`)}
 		>
-			<td className="p-3">
+			<td className="py-3 px-1 md:p-3">
 				<Button
 					variant="outline"
 					onClick={handelAddCoin}
-					className="w-1/2 h-1/2 group">
+					className="w-full md:w-1/2 h-1/2 group">
 					Добавить
 				</Button>
 			</td>
-			<td className="p-3">
+			<td className="py-3 md:p-3">
 				<div>{rank}</div>
 			</td>
-			<td className="p-3">
-				<div data-testid="symbol">{symbol}</div>
+			<td className="py-3 md:p-3">
+				<div>{symbol}</div>
 			</td>
-			<td className="p-3">
+			<td className="py-3 md:p-3">
 				<div>
 					<img
 						className="w-6 h-6 mx-auto"
@@ -84,17 +84,16 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
 				</div>
 			</td>
 			<td className={cn(
-				'p-3 transition-colors ease-in duration-500',
+				'py-3 md:p-3 transition-colors ease-in duration-500',
 				priceColor,
 			)}
-				data-testid="coin-price"
 			>
 				<div>{useFormatNumber(priceUsd)}</div>
 			</td>
-			<td className="p-3">
+			<td className="py-3 md:p-3">
 				<div>{useFormatNumber(marketCapUsd)}</div>
 			</td>
-			<td className="p-3" data-testid="percentage-change">{renderDif(changePercent24Hr.toString())}</td>
+			<td className="py-3 md:p-3">{renderDif(changePercent24Hr.toString())}</td>
 		</tr>
 	);
 };
@@ -107,7 +106,7 @@ const renderDif = (value: string) => {
 	const stringNum = num < 0.01 ? '0.01' : num.toFixed(2);
 
 	return (
-		<div className={cn(color, 'flex justify-center items-center')} data-testid="triangle-icon">
+		<div className={cn(color, 'flex justify-center items-center')}>
 			<Triangle size={8} color={isNegative ? '#dc2626' : '#16a34a'} direction={triangleDirection}
 					  className="mx-1" />
 			{stringNum}%
