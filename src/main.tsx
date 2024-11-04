@@ -11,7 +11,7 @@ import './index.css';
 import Root from './routes/Root.tsx';
 import Home from './routes/Home.tsx';
 import Coin from './routes/Coin.tsx';
-import ErrorPage from './routes/ErorPage.tsx';
+import ErrorPage from './routes/ErrorPage.tsx';
 
 const router = createBrowserRouter([
 	{
