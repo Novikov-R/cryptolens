@@ -67,7 +67,7 @@ const CoinContent: FC<CoinContentProps> = ({
 				onClick={handleModalOpen}
 				className="bg-blue-500 text-white py-3 rounded-xl hover:bg-blue-600 w-full shadow-md"
 			>
-				Добавить в портфолио
+				Добавить в портфель
 			</Button>
 		</div>
 	);
