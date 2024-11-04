@@ -16,7 +16,7 @@ const Portfolio = () => {
 	formattedDif = dif === 0
 		? '$0'
 		: `${dif > 0 ? '+' : '-'} $${formattedDif}`;
-	const formattedDifInPercent = useThousandSeparator(difInPercent);
+	const formattedDifInPercent = useThousandSeparator(difInPercent, 2);
 
 
 	return (
