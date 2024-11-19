@@ -1,22 +1,24 @@
 import { Link, useRouteError } from 'react-router-dom';
 
 interface RouteError {
-	statusText?: string;
-	message?: string;
+    statusText?: string;
+    message?: string;
 }
 
 export default function ErrorPage() {
-	const error = useRouteError() as RouteError;
-	console.error(error);
+    const error = useRouteError() as RouteError;
+    console.error(error);
 
-	return (
-		<div id="error-page" className="w-full h-screen flex flex-col justify-center items-center space-y-3">
-			<h1>Oops!</h1>
-			<p>Sorry, an unexpected error has occurred.</p>
-			<p>
-				<i>{error.statusText || error.message}</i>
-			</p>
-			<Link to="/" className="font-bold">На главную</Link>
-		</div>
-	);
+    return (
+        <div id='error-page' className='w-full h-screen flex flex-col justify-center items-center space-y-3'>
+            <h1>Oops!</h1>
+            <p>Sorry, an unexpected error has occurred.</p>
+            <p>
+                <i>{error.statusText || error.message}</i>
+            </p>
+            <Link to='/' className='font-bold'>
+                На главную
+            </Link>
+        </div>
+    );
 }

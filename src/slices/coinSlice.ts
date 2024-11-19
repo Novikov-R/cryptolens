@@ -1,19 +1,13 @@
-import {
-    createSlice,
-    createEntityAdapter,
-    EntityState,
-    Update,
-    PayloadAction,
-} from '@reduxjs/toolkit';
-import {Asset} from '../types/asset';
-import {ActiveFilter, Filter, SearchValue} from '../types/filter';
+import { createEntityAdapter, createSlice, EntityState, PayloadAction, Update } from '@reduxjs/toolkit';
+import { Asset } from '../types/asset';
+import { ActiveFilter, Filter, SearchValue } from '../types/filter';
 
 const coinsAdapter = createEntityAdapter<Asset>();
 
 type State = EntityState<Asset, string> & {
-    activeFilter: ActiveFilter,
-    selectedCoin: string | null,
-    searchValue: SearchValue,
+    activeFilter: ActiveFilter;
+    selectedCoin: string | null;
+    searchValue: SearchValue;
 };
 
 const initialState: State = coinsAdapter.getInitialState({
@@ -38,7 +32,6 @@ const coinsSlice = createSlice({
                 state.activeFilter.reverse = false;
                 state.activeFilter.filter = action.payload;
             }
-
         },
         setSelectedCoin: (state, action: PayloadAction<string>) => {
             state.selectedCoin = action.payload;
@@ -46,20 +39,20 @@ const coinsSlice = createSlice({
         setSearchValue: (state, action: PayloadAction<SearchValue>) => {
             state.searchValue = action.payload;
         },
-        setCoinPriceUpdates: (state, action: PayloadAction<{ id: string, priceUsd: number }[]>) => {
-            const updates: Update<Asset, string>[] = action.payload.map(({id, priceUsd}) => ({
+        setCoinPriceUpdates: (state, action: PayloadAction<{ id: string; priceUsd: number }[]>) => {
+            const updates: Update<Asset, string>[] = action.payload.map(({ id, priceUsd }) => ({
                 id,
-                changes: {priceUsd},
+                changes: { priceUsd },
             }));
             coinsAdapter.updateMany(state, updates);
         },
         setCoinUpdates: (state, action: PayloadAction<Asset[]>) => {
             const updates: Update<Asset, string>[] = action.payload.map((coin) => ({
                 id: coin.id,
-                changes: {...coin}
+                changes: { ...coin },
             }));
             coinsAdapter.updateMany(state, updates);
-        }
+        },
     },
 });
 
@@ -70,12 +63,11 @@ export const {
     setCoinPriceUpdates,
     setSearchValue,
     setSelectedCoin,
-    setCoinUpdates
+    setCoinUpdates,
 } = coinsSlice.actions;
 
-export const {
-    selectAll: selectAllCoins,
-    selectById: selectCoinById,
-} = coinsAdapter.getSelectors((state: { coins: State }) => state.coins);
+export const { selectAll: selectAllCoins, selectById: selectCoinById } = coinsAdapter.getSelectors(
+    (state: { coins: State }) => state.coins
+);
 
 export default coinsSlice.reducer;

@@ -1,12 +1,12 @@
-import {useEffect} from 'react';
-import {setCoinPriceUpdates} from '../slices/coinSlice';
-import {useAppDispatch} from './hooks.ts';
+import { useEffect } from 'react';
+import { setCoinPriceUpdates } from '../slices/coinSlice';
+import { useAppDispatch } from './hooks.ts';
 
 interface PriceUpdate {
     [id: string]: number;
 }
 
-const useCoinWebSocket = ({assetIds}: { assetIds: string[] }) => {
+const useCoinWebSocket = ({ assetIds }: { assetIds: string[] }) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
