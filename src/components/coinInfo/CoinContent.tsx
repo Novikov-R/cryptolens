@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Button } from '../ui/button/Button.tsx';
 import Skeleton from '../ui/skeleton/Skeleton.tsx';
 
@@ -18,13 +17,13 @@ export type CoinContentProps = {
     handleModalOpen: () => void;
 };
 
-const CoinContent: FC<CoinContentProps> = ({
+const CoinContent = ({
     isLoading,
     isError,
     handelBack,
     coin: { name, symbol, formattedPriceUsd, formattedMaxSupply, formattedSupply, rank, formattedMarketCapUsd },
-    handleModalOpen,
-}) => {
+    handleModalOpen
+}: CoinContentProps) => {
     if (isLoading) return <LoadingState />;
     if (isError) return <ErrorState />;
 

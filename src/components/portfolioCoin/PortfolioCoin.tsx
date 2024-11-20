@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import useFormatNumber from '../../hooks/useFormatNumber.ts';
 import { Button } from '../ui/button/Button.tsx';
 import useDeleteCoinFromStorage from '../../hooks/useDeleteCoinFromStorage.ts';
@@ -12,14 +11,14 @@ export type PortfolioCoinProps = {
     id: string;
 };
 
-const PortfolioCoin: FC<PortfolioCoinProps> = ({ timestamp, symbol, name, quantity, priceUsd, id }) => {
+const PortfolioCoin = ({ timestamp, symbol, name, quantity, priceUsd, id }: PortfolioCoinProps) => {
     const deleteCoin = useDeleteCoinFromStorage(id, timestamp);
 
     const date = new Date(timestamp);
-
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
+
     return (
         <div className='flex items-center justify-between w-full border-gray-400'>
             <div className='flex items-center sm:space-x-2 space-x-1'>

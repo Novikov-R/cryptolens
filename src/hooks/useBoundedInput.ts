@@ -4,7 +4,6 @@ const useBoundedInput = (initialValue: number, minValue: number, maxValue: numbe
     const [value, setValue] = useState(initialValue.toString());
 
     const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-        console.log(e);
         if (e.code === 'ArrowUp') {
             setValue((prevState) => (Number(prevState) < maxValue ? (Number(prevState) + 1).toString() : prevState));
         }

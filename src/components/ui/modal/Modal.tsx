@@ -1,4 +1,4 @@
-import { FC, MouseEvent, ReactNode, useEffect } from 'react';
+import { MouseEvent, ReactNode, useEffect } from 'react';
 import cn from '../../../utils/cn.ts';
 
 type ModalProps = {
@@ -11,7 +11,7 @@ type ModalProps = {
     className?: string;
 };
 
-const Modal: FC<ModalProps> = ({ isOpen, onClose, title, description, footer, children, className }) => {
+const Modal = ({ isOpen, onClose, title, description, footer, children, className }: ModalProps) => {
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
@@ -21,24 +21,16 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, title, description, footer, ch
 
         if (isOpen) {
             window.addEventListener('keydown', handleKeyDown);
-        }
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [isOpen, onClose]);
-
-    useEffect(() => {
-        if (isOpen) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'auto';
         }
 
         return () => {
+            window.removeEventListener('keydown', handleKeyDown);
             document.body.style.overflow = 'auto';
         };
-    }, [isOpen]);
+    }, [isOpen, onClose]);
 
     if (!isOpen) return null;
 
@@ -49,22 +41,18 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, title, description, footer, ch
     };
 
     return (
-        <>
-            <div
-                className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70'
-                onClick={handleOverlayClick}
-                data-testid={'modal'}
-            >
-                <div className={cn('bg-white rounded-lg shadow-lg max-w-md  mx-auto p-6 w-full', className)}>
-                    <div className='flex flex-col justify-between items-center h-full'>
-                        {title && <h2 className='text-lg font-semibold'>{title}</h2>}
-                        {description && <div className='mt-2 text-sm text-gray-600'>{description}</div>}
-                        <div className='mt-4 overflow-auto max-h-96 w-full max-w-sm px-2'>{children}</div>
-                        {footer && <div className='mt-4'>{footer}</div>}
-                    </div>
-                </div>
+        <div
+            className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70'
+            onClick={handleOverlayClick}
+            data-testid='modal'
+        >
+            <div className={cn('bg-white rounded-lg shadow-lg max-w-md mx-auto p-6 w-full', className)}>
+                {title && <h2 className='text-lg font-semibold'>{title}</h2>}
+                {description && <div className='mt-2 text-sm text-gray-600'>{description}</div>}
+                <div className='mt-4 overflow-auto max-h-96 w-full'>{children}</div>
+                {footer && <div className='mt-4'>{footer}</div>}
             </div>
-        </>
+        </div>
     );
 };
 

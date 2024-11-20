@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import cn from '../../../utils/cn.ts';
 
 interface SpinnerProps {
@@ -7,7 +6,7 @@ interface SpinnerProps {
     className?: string;
 }
 
-const Spinner: FC<SpinnerProps> = ({ size = 24, color = '#3b82f6', className = '' }) => {
+const Spinner = ({ size = 24, color = '#3b82f6', className = '' }: SpinnerProps) => {
     const isTailwindColor = color.includes('-');
     const colorClass = isTailwindColor ? `border-${color}` : '';
     const styleColor = !isTailwindColor ? { borderColor: color, borderTopColor: 'transparent' } : {};
@@ -18,7 +17,7 @@ const Spinner: FC<SpinnerProps> = ({ size = 24, color = '#3b82f6', className = '
             style={{
                 width: size,
                 height: size,
-                ...styleColor,
+                ...styleColor
             }}
         />
     );

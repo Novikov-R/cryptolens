@@ -1,5 +1,4 @@
 import useFormatNumber from '../../hooks/useFormatNumber.ts';
-import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 interface TopCoinProps {
@@ -9,7 +8,7 @@ interface TopCoinProps {
     id: string;
 }
 
-const TopCoin: FC<TopCoinProps> = ({ priceUsd, rank, symbol, id }) => {
+const TopCoin = ({ priceUsd, rank, symbol, id }: TopCoinProps) => {
     const formattedPrice = useFormatNumber(priceUsd);
 
     return (

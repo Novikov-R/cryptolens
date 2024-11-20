@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { setSelectedCoin } from '../../slices/coinSlice.ts';
 import cn from '../../utils/cn.ts';
@@ -18,15 +18,15 @@ export type CoinTableItemProps = {
     onAddCoin: (state: boolean) => void;
 };
 
-const CoinTableItem: FC<CoinTableItemProps> = ({
+const CoinTableItem = ({
     id,
     symbol,
     priceUsd,
     changePercent24Hr,
     marketCapUsd,
     rank,
-    onAddCoin,
-}) => {
+    onAddCoin
+}: CoinTableItemProps) => {
     const navigate = useNavigate();
     const [prevPrice, setPrevPrice] = useState(priceUsd);
     const [priceColor, setPriceColor] = useState('');
@@ -39,16 +39,14 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
             setPriceColor('text-red-600');
         }
 
-        const timer = setTimeout(() => {
-            setPriceColor('');
-        }, 2000);
+        const timer = setTimeout(() => setPriceColor(''), 2000);
 
         setPrevPrice(priceUsd);
 
         return () => clearTimeout(timer);
     }, [priceUsd, prevPrice]);
 
-    const handelAddCoin = (event: MouseEvent<HTMLButtonElement>) => {
+    const handleAddCoin = (event: MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
         dispatch(setSelectedCoin(id));
         onAddCoin(true);
@@ -62,9 +60,9 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
             <td className='py-3 px-1 md:p-3'>
                 <Button
                     variant='outline'
-                    onClick={handelAddCoin}
+                    onClick={handleAddCoin}
                     className='w-full md:w-1/2 h-1/2 group'
-                    data-testid={'addBtn'}
+                    data-testid='addBtn'
                 >
                     Добавить
                 </Button>
@@ -80,7 +78,7 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
                     <img
                         className='w-6 h-6 mx-auto'
                         src={`https://assets.coincap.io/assets/icons/${symbol.toLowerCase()}@2x.png`}
-                        alt='logo'
+                        alt={symbol}
                     />
                 </div>
             </td>
@@ -90,17 +88,17 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
             <td className='py-3 md:p-3'>
                 <div>{useFormatNumber(marketCapUsd)}</div>
             </td>
-            <td className='py-3 md:p-3'>{renderDif(changePercent24Hr.toString())}</td>
+            <td className='py-3 md:p-3'>{renderChange(changePercent24Hr.toString())}</td>
         </tr>
     );
 };
 
-const renderDif = (value: string) => {
-    const isNegative = value[0] === '-';
+const renderChange = (value: string) => {
+    const isNegative = value.startsWith('-');
     const color = isNegative ? 'text-red-600' : 'text-green-600';
     const triangleDirection = isNegative ? 'down' : 'up';
-    const num = isNegative ? Number(value.slice(1)) : Number(value);
-    const stringNum = num < 0.01 ? '0.01' : num.toFixed(2);
+    const num = Math.abs(Number(value));
+    const formattedNum = num < 0.01 ? '0.01' : num.toFixed(2);
 
     return (
         <div className={cn(color, 'flex justify-center items-center')}>
@@ -110,7 +108,7 @@ const renderDif = (value: string) => {
                 direction={triangleDirection}
                 className='mx-1'
             />
-            {stringNum}%
+            {formattedNum}%
         </div>
     );
 };
