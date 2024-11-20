@@ -53,6 +53,7 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, title, description, footer, ch
             <div
                 className='fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70'
                 onClick={handleOverlayClick}
+                data-testid={'modal'}
             >
                 <div className={cn('bg-white rounded-lg shadow-lg max-w-md  mx-auto p-6 w-full', className)}>
                     <div className='flex flex-col justify-between items-center h-full'>

@@ -37,9 +37,18 @@ const AddCoinModal = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (valu
             description={`Цена одной монеты ${useFormatNumber(priceUsd)}`}
         >
             <form className='flex flex-col items-center'>
-                <Input placeholder='0' onChange={onChangeCount} value={countOfCoins} className='max-w-xs mt-1' />
+                <Input
+                    data-testid='coin-input'
+                    placeholder='0'
+                    onChange={onChangeCount}
+                    value={countOfCoins}
+                    className='max-w-xs mt-1'
+                />
                 <div className='mt-2 text-center'>
-                    Общая сумма: <span className='font-bold'>{useFormatNumber(priceUsd * Number(countOfCoins))}</span>
+                    Общая сумма:{' '}
+                    <span className='font-bold' data-testid='total-sum'>
+                        {useFormatNumber(priceUsd * Number(countOfCoins))}
+                    </span>
                 </div>
                 <div className='flex mt-4 items-center justify-center'>
                     <Button
@@ -49,7 +58,7 @@ const AddCoinModal = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (valu
                     >
                         Отмена
                     </Button>
-                    <Button type='submit' variant='outline' onClick={handleAddCoin}>
+                    <Button type='submit' variant='outline' onClick={handleAddCoin} data-testid='submitBtn'>
                         Подтвердить
                     </Button>
                 </div>

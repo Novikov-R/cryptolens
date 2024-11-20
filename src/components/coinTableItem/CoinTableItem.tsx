@@ -60,7 +60,12 @@ const CoinTableItem: FC<CoinTableItemProps> = ({
             onClick={() => navigate(`/coin/${id}`)}
         >
             <td className='py-3 px-1 md:p-3'>
-                <Button variant='outline' onClick={handelAddCoin} className='w-full md:w-1/2 h-1/2 group'>
+                <Button
+                    variant='outline'
+                    onClick={handelAddCoin}
+                    className='w-full md:w-1/2 h-1/2 group'
+                    data-testid={'addBtn'}
+                >
                     Добавить
                 </Button>
             </td>

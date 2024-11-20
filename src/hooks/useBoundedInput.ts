@@ -5,7 +5,10 @@ const useBoundedInput = (initialValue: number, minValue: number, maxValue: numbe
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         let newValue = e.target.value;
-        if (!/^-?\d*[.,]?\d{0,18}$/.test(newValue)) {
+        if (/^0\d+/.test(newValue)) {
+            newValue = newValue.replace(/^0/, '');
+        }
+        if (!/^(0|-?([1-9]\d*|0)?([.,]\d{0,18})?)$/.test(newValue)) {
             return;
         }
 
