@@ -17,37 +17,37 @@ const Chart = ({ data }: { data: AssetHistory[] }) => {
                 type: 'area',
                 backgroundColor: '#f4f4f4',
                 spacing: [10, 10, 10, 10],
-                height: '100%',
+                height: '100%'
             },
             title: {
-                text: '',
+                text: ''
             },
             xAxis: {
                 type: 'datetime',
                 title: {
                     text: 'Время',
-                    style: { fontWeight: 'bold' },
+                    style: { fontWeight: 'bold' }
                 },
                 labels: {
                     format: '{value:%e %b, %H:%M}',
                     rotation: -45,
-                    align: 'right',
+                    align: 'right'
                 },
-                gridLineWidth: 1,
+                gridLineWidth: 1
             },
             yAxis: {
                 title: {
                     text: 'Цена (USD)',
-                    style: { fontWeight: 'bold' },
+                    style: { fontWeight: 'bold' }
                 },
                 plotLines: [
                     {
                         color: '#888',
                         width: 1,
                         value: averagePrice,
-                        dashStyle: 'ShortDash',
-                    },
-                ],
+                        dashStyle: 'ShortDash'
+                    }
+                ]
             },
             tooltip: {
                 shared: true,
@@ -60,34 +60,34 @@ const Chart = ({ data }: { data: AssetHistory[] }) => {
                 borderWidth: 1,
                 style: {
                     fontSize: '12px',
-                    padding: '10px',
-                },
+                    padding: '10px'
+                }
             },
             plotOptions: {
                 area: {
                     marker: {
                         enabled: false,
                         symbol: 'circle',
-                        radius: 3,
+                        radius: 3
                     },
                     lineWidth: 1,
                     states: {
                         hover: {
-                            lineWidth: 1,
-                        },
+                            lineWidth: 1
+                        }
                     },
                     threshold: averagePrice,
                     color: 'rgba(0, 255, 127, 1)',
-                    negativeColor: 'rgba(255, 99, 71, 1)',
-                },
+                    negativeColor: 'rgba(255, 99, 71, 1)'
+                }
             },
             series: [
                 {
                     name: 'Цена в USD',
                     data: seriesData,
-                    type: 'area',
-                },
-            ],
+                    type: 'area'
+                }
+            ]
         }),
         [seriesData, averagePrice]
     );

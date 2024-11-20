@@ -13,10 +13,10 @@ type State = EntityState<Asset, string> & {
 const initialState: State = coinsAdapter.getInitialState({
     activeFilter: {
         filter: 'rank',
-        reverse: false,
+        reverse: false
     },
     selectedCoin: null,
-    searchValue: null,
+    searchValue: null
 });
 
 const coinsSlice = createSlice({
@@ -42,18 +42,18 @@ const coinsSlice = createSlice({
         setCoinPriceUpdates: (state, action: PayloadAction<{ id: string; priceUsd: number }[]>) => {
             const updates: Update<Asset, string>[] = action.payload.map(({ id, priceUsd }) => ({
                 id,
-                changes: { priceUsd },
+                changes: { priceUsd }
             }));
             coinsAdapter.updateMany(state, updates);
         },
         setCoinUpdates: (state, action: PayloadAction<Asset[]>) => {
             const updates: Update<Asset, string>[] = action.payload.map((coin) => ({
                 id: coin.id,
-                changes: { ...coin },
+                changes: { ...coin }
             }));
             coinsAdapter.updateMany(state, updates);
-        },
-    },
+        }
+    }
 });
 
 export const {
@@ -63,7 +63,7 @@ export const {
     setCoinPriceUpdates,
     setSearchValue,
     setSelectedCoin,
-    setCoinUpdates,
+    setCoinUpdates
 } = coinsSlice.actions;
 
 export const { selectAll: selectAllCoins, selectById: selectCoinById } = coinsAdapter.getSelectors(

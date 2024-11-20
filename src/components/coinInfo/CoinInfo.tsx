@@ -32,7 +32,7 @@ const CoinInfo = ({ coinId }: { coinId: string }) => {
         supply: 0,
         maxSupply: 0,
         priceUsd: 0,
-        marketCapUsd: 0,
+        marketCapUsd: 0
     };
 
     useCoinWebSocket({ assetIds: [coinId] });
@@ -53,7 +53,7 @@ const CoinInfo = ({ coinId }: { coinId: string }) => {
                     formattedPriceUsd,
                     formattedMarketCapUsd,
                     formattedSupply,
-                    formattedMaxSupply,
+                    formattedMaxSupply
                 }}
                 handleModalOpen={handleModalOpen}
             />

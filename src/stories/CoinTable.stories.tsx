@@ -7,11 +7,11 @@ const meta: Meta<typeof CoinTable> = {
     parameters: {
         docs: {
             description: {
-                component: 'Таблица криптовалют с фильтрацией, пагинацией и возможностью добавления монет в портфель.',
-            },
-        },
+                component: 'Таблица криптовалют с фильтрацией, пагинацией и возможностью добавления монет в портфель.'
+            }
+        }
     },
-    tags: ['autodocs'],
+    tags: ['autodocs']
 };
 
 export default meta;

@@ -18,14 +18,14 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home />,
+                element: <Home />
             },
             {
                 path: '/coin/:coinId',
-                element: <Coin />,
-            },
-        ],
-    },
+                element: <Coin />
+            }
+        ]
+    }
 ]);
 
 createRoot(document.getElementById('root')!).render(

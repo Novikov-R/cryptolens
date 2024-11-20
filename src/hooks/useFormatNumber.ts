@@ -9,7 +9,7 @@ const useFormatNumber = (value: number) => {
             '$' +
             new Intl.NumberFormat('en', {
                 notation: 'compact',
-                maximumFractionDigits: 2,
+                maximumFractionDigits: 2
             }).format(value)
         );
     }, [value]);

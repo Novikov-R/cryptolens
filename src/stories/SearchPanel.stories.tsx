@@ -7,11 +7,11 @@ const meta: Meta<typeof SearchPanel> = {
     parameters: {
         docs: {
             description: {
-                component: 'Компонент панели поиска для фильтрации элементов.',
-            },
-        },
+                component: 'Компонент панели поиска для фильтрации элементов.'
+            }
+        }
     },
-    tags: ['autodocs'],
+    tags: ['autodocs']
 };
 
 export default meta;

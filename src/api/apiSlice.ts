@@ -13,7 +13,7 @@ const transformAssetData = (data: Asset): Asset => {
         volumeUsd24Hr: Number(data.volumeUsd24Hr),
         priceUsd: Number(data.priceUsd),
         changePercent24Hr: Number(data.changePercent24Hr),
-        vwap24Hr: Number(data.vwap24Hr),
+        vwap24Hr: Number(data.vwap24Hr)
     };
 };
 
@@ -25,7 +25,7 @@ const transformHistoryAssetData = (data: AssetHistory[]): AssetHistory[] => {
             ...history,
             priceUsd: price,
             time: Number(history.time),
-            circulatingSupply: Number(history.circulatingSupply),
+            circulatingSupply: Number(history.circulatingSupply)
         };
     });
 };
@@ -50,8 +50,8 @@ export const apiSlice = createApi({
             },
             transformResponse: (response: AssetsResponse) => ({
                 ...response,
-                data: response.data.map(transformAssetData),
-            }),
+                data: response.data.map(transformAssetData)
+            })
         }),
         getCoin: builder.query<AssetResponse, string>({
             query: (id: string) => `/assets/${id}`,
@@ -66,15 +66,15 @@ export const apiSlice = createApi({
             },
             transformResponse: (response: AssetResponse) => ({
                 ...response,
-                data: transformAssetData(response.data),
-            }),
+                data: transformAssetData(response.data)
+            })
         }),
         getCoinHistory: builder.query<AssetHistoryResponse, { id: string; interval: Interval }>({
             query: ({ id, interval }) => `/assets/${id}/history?interval=${interval}`,
             transformResponse: (response: AssetHistoryResponse) => ({
                 ...response,
-                data: transformHistoryAssetData(response.data),
-            }),
+                data: transformHistoryAssetData(response.data)
+            })
         }),
         getTopCoins: builder.query<AssetsResponse, number>({
             query: (limit) => `/assets?limit=${limit}`,
@@ -88,10 +88,10 @@ export const apiSlice = createApi({
             },
             transformResponse: (response: AssetsResponse) => ({
                 ...response,
-                data: response.data.map(transformAssetData),
-            }),
-        }),
-    }),
+                data: response.data.map(transformAssetData)
+            })
+        })
+    })
 });
 
 export const { useGetCoinsQuery, useGetCoinQuery, useGetCoinHistoryQuery, useGetTopCoinsQuery } = apiSlice;

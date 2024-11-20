@@ -8,11 +8,11 @@ const meta: Meta<typeof PortfolioCoin> = {
         docs: {
             description: {
                 component:
-                    'Компонент для отображения информации о монете в портфеле. Включает информацию о дате, названии, символе, цене и количестве.',
-            },
-        },
+                    'Компонент для отображения информации о монете в портфеле. Включает информацию о дате, названии, символе, цене и количестве.'
+            }
+        }
     },
-    tags: ['autodocs'],
+    tags: ['autodocs']
 };
 
 export default meta;
@@ -26,7 +26,7 @@ Default.args = {
     name: 'Bitcoin',
     priceUsd: 50000,
     quantity: 2,
-    id: '1',
+    id: '1'
 };
 
 export const RecentDate = Template.bind({});
@@ -36,5 +36,5 @@ RecentDate.args = {
     name: 'Litecoin',
     priceUsd: 200,
     quantity: 5,
-    id: '4',
+    id: '4'
 };

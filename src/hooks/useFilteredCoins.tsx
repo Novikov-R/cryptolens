@@ -6,7 +6,7 @@ const useFilteredCoins = ({
     activeCoins,
     deferredSearchValue,
     activeFilter,
-    filterReveres,
+    filterReveres
 }: {
     activeCoins: Asset[];
     deferredSearchValue: string | null;

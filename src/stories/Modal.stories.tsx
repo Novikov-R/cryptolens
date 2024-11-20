@@ -9,37 +9,37 @@ const meta: Meta<typeof Modal> = {
     parameters: {
         docs: {
             description: {
-                component: 'Компонент модального окна для отображения контента и взаимодействия с пользователем.',
-            },
-        },
+                component: 'Компонент модального окна для отображения контента и взаимодействия с пользователем.'
+            }
+        }
     },
     tags: ['autodocs'],
     argTypes: {
         isOpen: {
             control: { type: 'boolean' },
-            description: 'Управляет открытием модального окна.',
+            description: 'Управляет открытием модального окна.'
         },
         onClose: {
             action: 'closed',
-            description: 'Функция, вызываемая при закрытии модального окна.',
+            description: 'Функция, вызываемая при закрытии модального окна.'
         },
         title: {
             control: 'text',
-            description: 'Заголовок модального окна.',
+            description: 'Заголовок модального окна.'
         },
         description: {
             control: 'text',
-            description: 'Описание модального окна.',
+            description: 'Описание модального окна.'
         },
         footer: {
             control: false,
-            description: 'Контент в подвале модального окна.',
+            description: 'Контент в подвале модального окна.'
         },
         className: {
             control: 'text',
-            description: 'Дополнительные классы для кастомизации компонента.',
-        },
-    },
+            description: 'Дополнительные классы для кастомизации компонента.'
+        }
+    }
 };
 
 export default meta;
@@ -75,12 +75,12 @@ Default.args = {
         <Button variant='default' onClick={() => alert(1)}>
             Click
         </Button>
-    ),
+    )
 };
 
 export const WithChildren = Template.bind({});
 WithChildren.args = {
     isOpen: false,
     title: 'Модальное окно с детьми',
-    children: <div>Ребенок</div>,
+    children: <div>Ребенок</div>
 };

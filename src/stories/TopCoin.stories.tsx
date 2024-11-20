@@ -7,29 +7,29 @@ const meta: Meta<typeof TopCoin> = {
     parameters: {
         docs: {
             description: {
-                component: 'Компонент для отображения информации о популярной монете, включая её цену, ранг и символ.',
-            },
-        },
+                component: 'Компонент для отображения информации о популярной монете, включая её цену, ранг и символ.'
+            }
+        }
     },
     tags: ['autodocs'],
     argTypes: {
         priceUsd: {
             control: { type: 'number' },
-            description: 'Цена монеты в долларах США.',
+            description: 'Цена монеты в долларах США.'
         },
         rank: {
             control: { type: 'number' },
-            description: 'Ранг монеты.',
+            description: 'Ранг монеты.'
         },
         symbol: {
             control: { type: 'text' },
-            description: 'Символ монеты.',
+            description: 'Символ монеты.'
         },
         id: {
             control: { type: 'text' },
-            description: 'Идентификатор монеты для ссылки.',
-        },
-    },
+            description: 'Идентификатор монеты для ссылки.'
+        }
+    }
 };
 
 export default meta;
@@ -41,7 +41,7 @@ Default.args = {
     priceUsd: 1000,
     rank: 1,
     symbol: 'BTC',
-    id: 'bitcoin',
+    id: 'bitcoin'
 };
 
 export const WithLowPrice = Template.bind({});
@@ -49,5 +49,5 @@ WithLowPrice.args = {
     priceUsd: 0.005,
     rank: 2,
     symbol: 'ETH',
-    id: 'ethereum',
+    id: 'ethereum'
 };

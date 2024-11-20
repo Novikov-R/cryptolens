@@ -5,10 +5,10 @@ import { configureStore } from '@reduxjs/toolkit';
 const store = configureStore({
     reducer: {
         coins: coinSlice,
-        [apiSlice.reducerPath]: apiSlice.reducer,
+        [apiSlice.reducerPath]: apiSlice.reducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
-    devTools: true,
+    devTools: true
 });
 
 export type AppStore = typeof store;

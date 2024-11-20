@@ -7,29 +7,29 @@ const meta: Meta<typeof Triangle> = {
     parameters: {
         docs: {
             description: {
-                component: 'Компонент треугольника, который можно использовать для отображения стрелок или указателей.',
-            },
-        },
+                component: 'Компонент треугольника, который можно использовать для отображения стрелок или указателей.'
+            }
+        }
     },
     tags: ['autodocs'],
     argTypes: {
         size: {
             control: { type: 'number' },
-            description: 'Размер треугольника в пикселях.',
+            description: 'Размер треугольника в пикселях.'
         },
         color: {
             control: { type: 'color' },
-            description: 'Цвет треугольника.',
+            description: 'Цвет треугольника.'
         },
         direction: {
             control: { type: 'radio', options: ['up', 'down'] },
-            description: 'Направление треугольника.',
+            description: 'Направление треугольника.'
         },
         className: {
             control: 'text',
-            description: 'Дополнительные tailwind классы для кастомизации компонента.',
-        },
-    },
+            description: 'Дополнительные tailwind классы для кастомизации компонента.'
+        }
+    }
 };
 
 export default meta;
@@ -41,7 +41,7 @@ UpTriangle.args = {
     size: 50,
     color: '#007bff',
     direction: 'up',
-    className: '',
+    className: ''
 };
 
 export const DownTriangle = Template.bind({});
@@ -49,5 +49,5 @@ DownTriangle.args = {
     size: 50,
     color: '#dc3545',
     direction: 'down',
-    className: '',
+    className: ''
 };

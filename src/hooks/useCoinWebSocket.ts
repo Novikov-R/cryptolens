@@ -20,7 +20,7 @@ const useCoinWebSocket = ({ assetIds }: { assetIds: string[] }) => {
 
             const updates = Object.entries(data).map(([id, price]) => ({
                 id,
-                priceUsd: Number(price),
+                priceUsd: Number(price)
             }));
 
             dispatch(setCoinPriceUpdates(updates));

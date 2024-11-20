@@ -5,9 +5,9 @@ const meta: Meta = {
     title: 'Components/CoinHistoryChart',
     component: CoinHistoryChart,
     argTypes: {
-        coinId: { control: 'text' },
+        coinId: { control: 'text' }
     },
-    tags: ['autodocs'],
+    tags: ['autodocs']
 };
 
 export default meta;
@@ -16,9 +16,9 @@ const Template: StoryFn<{ coinId: string }> = (args) => <CoinHistoryChart {...ar
 
 export const Default = Template.bind({});
 Default.args = {
-    coinId: 'bitcoin',
+    coinId: 'bitcoin'
 };
 export const Error = Template.bind({});
 Error.args = {
-    coinId: 'bitcin',
+    coinId: 'bitcin'
 };

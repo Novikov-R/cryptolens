@@ -8,30 +8,30 @@ const meta: Meta<ButtonProps> = {
     parameters: {
         docs: {
             description: {
-                component: 'Кнопка',
-            },
-        },
+                component: 'Кнопка'
+            }
+        }
     },
     tags: ['autodocs'],
     argTypes: {
         variant: {
             control: 'select',
             options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
-            description: 'Определяет стиль кнопки',
+            description: 'Определяет стиль кнопки'
         },
         size: {
             control: 'select',
             options: ['default', 'sm', 'lg', 'icon'],
-            description: 'Определяет размер кнопки',
+            description: 'Определяет размер кнопки'
         },
         disabled: {
             control: 'boolean',
-            description: 'Отключает кнопку',
-        },
+            description: 'Отключает кнопку'
+        }
     },
     args: {
-        onClick: fn(),
-    },
+        onClick: fn()
+    }
 };
 
 export default meta;
@@ -43,58 +43,58 @@ const Template: StoryFn<ButtonProps> = (args: ButtonProps) => (
 export const Default = Template.bind({});
 Default.args = {
     variant: 'default',
-    size: 'default',
+    size: 'default'
 };
 
 export const Destructive = Template.bind({});
 Destructive.args = {
     variant: 'destructive',
-    size: 'default',
+    size: 'default'
 };
 
 export const Outline = Template.bind({});
 Outline.args = {
     variant: 'outline',
-    size: 'default',
+    size: 'default'
 };
 
 export const Secondary = Template.bind({});
 Secondary.args = {
     variant: 'secondary',
-    size: 'default',
+    size: 'default'
 };
 
 export const Ghost = Template.bind({});
 Ghost.args = {
     variant: 'ghost',
-    size: 'default',
+    size: 'default'
 };
 
 export const Link = Template.bind({});
 Link.args = {
     variant: 'link',
-    size: 'default',
+    size: 'default'
 };
 
 export const Small = Template.bind({});
 Small.args = {
-    size: 'sm',
+    size: 'sm'
 };
 
 export const Large = Template.bind({});
 Large.args = {
-    size: 'lg',
+    size: 'lg'
 };
 
 export const Icon = Template.bind({});
 Icon.args = {
     size: 'icon',
-    children: '🔍',
+    children: '🔍'
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
     variant: 'default',
     size: 'default',
-    disabled: true,
+    disabled: true
 };

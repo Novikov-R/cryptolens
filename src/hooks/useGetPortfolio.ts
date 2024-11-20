@@ -21,7 +21,7 @@ const useGetPortfolio = () => {
         cost: 0,
         dif: 0,
         difInPercent: 0,
-        portfolioCoins: [],
+        portfolioCoins: []
     });
 
     const loadPortfolioData = async () => {
@@ -53,7 +53,7 @@ const useGetPortfolio = () => {
                 cost: newTotalSum,
                 dif,
                 difInPercent,
-                portfolioCoins,
+                portfolioCoins
             });
         }
     };

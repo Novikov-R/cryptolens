@@ -4,7 +4,7 @@ const useThousandSeparator = (value: number, decimals = 0): string => {
     return useMemo(() => {
         return value.toLocaleString('en-US', {
             minimumFractionDigits: decimals,
-            maximumFractionDigits: decimals,
+            maximumFractionDigits: decimals
         });
     }, [value, decimals]);
 };

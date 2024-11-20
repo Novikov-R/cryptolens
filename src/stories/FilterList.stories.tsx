@@ -7,11 +7,11 @@ const meta: Meta<typeof FilterList> = {
     parameters: {
         docs: {
             description: {
-                component: 'Компонент списка фильтров для сортировки криптовалют.',
-            },
-        },
+                component: 'Компонент списка фильтров для сортировки криптовалют.'
+            }
+        }
     },
-    tags: ['autodocs'],
+    tags: ['autodocs']
 };
 
 export default meta;

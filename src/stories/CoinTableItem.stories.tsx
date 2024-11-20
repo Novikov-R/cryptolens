@@ -7,29 +7,29 @@ const meta: Meta<typeof CoinTableItem> = {
     parameters: {
         docs: {
             description: {
-                component: 'Строка таблицы с информацией о монете',
-            },
-        },
+                component: 'Строка таблицы с информацией о монете'
+            }
+        }
     },
     argTypes: {
         id: {
-            control: 'text',
+            control: 'text'
         },
         symbol: {
-            control: 'text',
+            control: 'text'
         },
         priceUsd: {
-            control: 'number',
+            control: 'number'
         },
         changePercent24Hr: {
-            control: 'number',
+            control: 'number'
         },
         marketCapUsd: {
-            control: 'number',
+            control: 'number'
         },
         rank: {
-            control: 'number',
-        },
+            control: 'number'
+        }
     },
     args: {
         id: 'btc',
@@ -38,9 +38,9 @@ const meta: Meta<typeof CoinTableItem> = {
         changePercent24Hr: 2.5,
         marketCapUsd: 900000000,
         rank: 1,
-        onAddCoin: () => {},
+        onAddCoin: () => {}
     },
-    tags: ['autodocs'],
+    tags: ['autodocs']
 };
 
 export default meta;
@@ -55,10 +55,10 @@ const Template: StoryFn<CoinTableItemProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-    changePercent24Hr: 2.5,
+    changePercent24Hr: 2.5
 };
 
 export const NegativeChange = Template.bind({});
 NegativeChange.args = {
-    changePercent24Hr: -3.8,
+    changePercent24Hr: -3.8
 };

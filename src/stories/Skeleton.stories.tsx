@@ -8,17 +8,17 @@ const meta: Meta<typeof Skeleton> = {
     parameters: {
         docs: {
             description: {
-                component: 'Компонент-заполнитель, который можно использовать при загрузке данных.',
-            },
-        },
+                component: 'Компонент-заполнитель, который можно использовать при загрузке данных.'
+            }
+        }
     },
     tags: ['autodocs'],
     argTypes: {
         className: {
             control: 'text',
-            description: 'Дополнительные tailwind классы для кастомизации компонента',
-        },
-    },
+            description: 'Дополнительные tailwind классы для кастомизации компонента'
+        }
+    }
 };
 
 export default meta;
@@ -27,5 +27,5 @@ const Template: StoryFn<HTMLAttributes<HTMLDivElement>> = (args) => <Skeleton {.
 
 export const Default = Template.bind({});
 Default.args = {
-    className: 'h-10 w-full',
+    className: 'h-10 w-full'
 };

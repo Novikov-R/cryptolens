@@ -8,9 +8,9 @@ const meta: Meta = {
         isLoading: { control: 'boolean' },
         isError: { control: 'boolean' },
         handleModalOpen: { action: 'handleModalOpen' },
-        handelBack: { action: 'handelBack' },
+        handelBack: { action: 'handelBack' }
     },
-    tags: ['autodocs'],
+    tags: ['autodocs']
 };
 
 export default meta;
@@ -28,8 +28,8 @@ Default.args = {
         formattedMarketCapUsd: '1.1m',
         formattedMaxSupply: '21m',
         formattedSupply: '18.7m',
-        rank: 1,
-    },
+        rank: 1
+    }
 };
 
 export const Loading = Template.bind({});
@@ -43,8 +43,8 @@ Loading.args = {
         formattedMarketCapUsd: '',
         formattedMaxSupply: '',
         formattedSupply: '',
-        rank: 0,
-    },
+        rank: 0
+    }
 };
 
 export const Error = Template.bind({});
@@ -58,6 +58,6 @@ Error.args = {
         formattedMarketCapUsd: '',
         formattedMaxSupply: '',
         formattedSupply: '',
-        rank: 0,
-    },
+        rank: 0
+    }
 };

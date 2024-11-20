@@ -52,7 +52,7 @@ const renderTableContent = ({
     isLoading,
     isError,
     filteredCoins,
-    setIsModalOpen,
+    setIsModalOpen
 }: {
     isLoading: boolean;
     isError: boolean;

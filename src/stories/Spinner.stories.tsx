@@ -8,25 +8,25 @@ const meta: Meta<typeof Spinner> = {
     parameters: {
         docs: {
             description: {
-                component: 'Компонент загрузки в виде спиннера, который можно использовать для отображения загрузки.',
-            },
-        },
+                component: 'Компонент загрузки в виде спиннера, который можно использовать для отображения загрузки.'
+            }
+        }
     },
     tags: ['autodocs'],
     argTypes: {
         size: {
             control: { type: 'number' },
-            description: 'Размер спиннера в пикселях.',
+            description: 'Размер спиннера в пикселях.'
         },
         color: {
             control: { type: 'color' },
-            description: 'Цвет спиннера.',
+            description: 'Цвет спиннера.'
         },
         className: {
             control: 'text',
-            description: 'Дополнительные классы для кастомизации компонента.',
-        },
-    },
+            description: 'Дополнительные классы для кастомизации компонента.'
+        }
+    }
 };
 
 export default meta;
@@ -36,18 +36,18 @@ const Template: StoryFn<ComponentProps<typeof Spinner>> = (args) => <Spinner {..
 export const Default = Template.bind({});
 Default.args = {
     size: 24,
-    className: '',
+    className: ''
 };
 
 export const LargeSpinner = Template.bind({});
 LargeSpinner.args = {
     size: 78,
-    className: '',
+    className: ''
 };
 
 export const CustomColorSpinner = Template.bind({});
 CustomColorSpinner.args = {
     size: 36,
     color: '#1abc9c',
-    className: '',
+    className: ''
 };

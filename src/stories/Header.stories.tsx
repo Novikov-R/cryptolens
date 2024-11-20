@@ -7,11 +7,11 @@ const meta: Meta<typeof Header> = {
     parameters: {
         docs: {
             description: {
-                component: 'Компонент заголовка, отображающий лучшие монеты и портфель.',
-            },
-        },
+                component: 'Компонент заголовка, отображающий лучшие монеты и портфель.'
+            }
+        }
     },
-    tags: ['autodocs'],
+    tags: ['autodocs']
 };
 
 export default meta;

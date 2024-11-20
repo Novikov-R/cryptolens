@@ -3,7 +3,7 @@ import Portfolio from '../components/portfolio/Portfolio.tsx';
 
 const meta: Meta<typeof Portfolio> = {
     title: 'Components/Portfolio',
-    component: Portfolio,
+    component: Portfolio
 };
 
 export default meta;

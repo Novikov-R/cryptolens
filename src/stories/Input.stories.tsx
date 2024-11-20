@@ -7,29 +7,29 @@ const meta: Meta<InputProps> = {
     parameters: {
         docs: {
             description: {
-                component: 'Текстовое поле для ввода.',
-            },
-        },
+                component: 'Текстовое поле для ввода.'
+            }
+        }
     },
     tags: ['autodocs'],
     argTypes: {
         type: {
             control: 'select',
             options: ['text', 'password', 'email', 'number'],
-            description: 'Тип ввода текста.',
+            description: 'Тип ввода текста.'
         },
         disabled: {
             control: 'boolean',
-            description: 'Отключает поле ввода.',
+            description: 'Отключает поле ввода.'
         },
         placeholder: {
             control: 'text',
-            description: 'Текст-подсказка в поле ввода.',
-        },
+            description: 'Текст-подсказка в поле ввода.'
+        }
     },
     args: {
-        placeholder: 'Введите текст...',
-    },
+        placeholder: 'Введите текст...'
+    }
 };
 
 export default meta;
@@ -38,29 +38,29 @@ const Template: StoryFn<InputProps> = (args: InputProps) => <Input {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    type: 'text',
+    type: 'text'
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
     type: 'text',
-    disabled: true,
+    disabled: true
 };
 
 export const Password = Template.bind({});
 Password.args = {
     type: 'password',
-    placeholder: 'Введите пароль...',
+    placeholder: 'Введите пароль...'
 };
 
 export const Email = Template.bind({});
 Email.args = {
     type: 'email',
-    placeholder: 'Введите ваш email...',
+    placeholder: 'Введите ваш email...'
 };
 
 export const Number = Template.bind({});
 Number.args = {
     type: 'number',
-    placeholder: 'Введите число...',
+    placeholder: 'Введите число...'
 };
