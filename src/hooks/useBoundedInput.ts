@@ -1,7 +1,18 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 const useBoundedInput = (initialValue: number, minValue: number, maxValue: number) => {
     const [value, setValue] = useState(initialValue.toString());
+
+    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        console.log(e);
+        if (e.code === 'ArrowUp') {
+            setValue((prevState) => (Number(prevState) < maxValue ? (Number(prevState) + 1).toString() : prevState));
+        }
+
+        if (e.code === 'ArrowDown') {
+            setValue((prevState) => (Number(prevState) > minValue ? (Number(prevState) - 1).toString() : prevState));
+        }
+    };
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         let newValue = e.target.value;
@@ -34,6 +45,7 @@ const useBoundedInput = (initialValue: number, minValue: number, maxValue: numbe
         value,
         onChange,
         clearValue,
+        onKeyDown
     };
 };
 

@@ -9,7 +9,7 @@ import useAddCoinToStorage from '../../hooks/useAddCoinToStorage.ts';
 import { useEffect } from 'react';
 
 const AddCoinModal = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (value: boolean) => void }) => {
-    const { onChange: onChangeCount, value: countOfCoins, clearValue } = useBoundedInput(0, 0, 2000);
+    const { onChange: onChangeCount, onKeyDown, value: countOfCoins, clearValue } = useBoundedInput(0, 0, 2000);
 
     useEffect(() => {
         if (!isOpen) clearValue();
@@ -43,6 +43,7 @@ const AddCoinModal = ({ isOpen, setIsOpen }: { isOpen: boolean; setIsOpen: (valu
                     onChange={onChangeCount}
                     value={countOfCoins}
                     className='max-w-xs mt-1'
+                    onKeyDown={onKeyDown}
                 />
                 <div className='mt-2 text-center'>
                     Общая сумма:{' '}
