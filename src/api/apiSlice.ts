@@ -32,7 +32,7 @@ const transformHistoryAssetData = (data: AssetHistory[]): AssetHistory[] => {
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.coincap.io/v3/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://rest.coincap.io/v3/' }),
     endpoints: (builder) => ({
         getCoins: builder.query<AssetsResponse, { limit?: number; offset?: number; search?: string | null }>({
             query: ({ limit = 100, offset = 0, search }) => {
