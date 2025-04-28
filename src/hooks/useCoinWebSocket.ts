@@ -13,7 +13,7 @@ const useCoinWebSocket = ({ assetIds }: { assetIds: string[] }) => {
         if (assetIds.length === 0) {
             return;
         }
-        const pricesWs = new WebSocket(`wss://ws.coincap.io/prices?assets=${assetIds.join(',')}`);
+        const pricesWs = new WebSocket(`wss://wss.coincap.io/prices?assets=${assetIds.join(',')}&apiKey=922270bf460c0c898a76c468c877e25dd12e4fc1761064b38911e4be232d2760`);
 
         pricesWs.onmessage = function (msg: MessageEvent) {
             const data: PriceUpdate = JSON.parse(msg.data);
