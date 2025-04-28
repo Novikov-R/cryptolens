@@ -32,12 +32,12 @@ const transformHistoryAssetData = (data: AssetHistory[]): AssetHistory[] => {
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.coincap.io/v2/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.coincap.io/v3/' }),
     endpoints: (builder) => ({
         getCoins: builder.query<AssetsResponse, { limit?: number; offset?: number; search?: string | null }>({
             query: ({ limit = 100, offset = 0, search }) => {
                 const searchString = search ? `&search=${search}` : '';
-                return `/assets?offset=${offset}&limit=${limit}${searchString}`;
+                return `/assets?offset=${offset}&limit=${limit}${searchString}&apiKey=922270bf460c0c898a76c468c877e25dd12e4fc1761064b38911e4be232d2760`;
             },
             keepUnusedDataFor: 0,
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
@@ -54,7 +54,7 @@ export const apiSlice = createApi({
             })
         }),
         getCoin: builder.query<AssetResponse, string>({
-            query: (id: string) => `/assets/${id}`,
+            query: (id: string) => `/assets/${id}&apiKey=922270bf460c0c898a76c468c877e25dd12e4fc1761064b38911e4be232d2760`,
             keepUnusedDataFor: 0,
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
@@ -70,14 +70,14 @@ export const apiSlice = createApi({
             })
         }),
         getCoinHistory: builder.query<AssetHistoryResponse, { id: string; interval: Interval }>({
-            query: ({ id, interval }) => `/assets/${id}/history?interval=${interval}`,
+            query: ({ id, interval }) => `/assets/${id}/history?interval=${interval}&apiKey=922270bf460c0c898a76c468c877e25dd12e4fc1761064b38911e4be232d2760`,
             transformResponse: (response: AssetHistoryResponse) => ({
                 ...response,
                 data: transformHistoryAssetData(response.data)
             })
         }),
         getTopCoins: builder.query<AssetsResponse, number>({
-            query: (limit) => `/assets?limit=${limit}`,
+            query: (limit) => `/assets?limit=${limit}&apiKey=922270bf460c0c898a76c468c877e25dd12e4fc1761064b38911e4be232d2760`,
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
                     const { data } = await queryFulfilled;
