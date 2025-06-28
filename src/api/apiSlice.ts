@@ -54,7 +54,7 @@ export const apiSlice = createApi({
             })
         }),
         getCoin: builder.query<AssetResponse, string>({
-            query: (id: string) => `/assets/${id}&apiKey=922270bf460c0c898a76c468c877e25dd12e4fc1761064b38911e4be232d2760`,
+            query: (id: string) => `/assets/${id}?apiKey=922270bf460c0c898a76c468c877e25dd12e4fc1761064b38911e4be232d2760`,
             keepUnusedDataFor: 0,
             async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 try {
